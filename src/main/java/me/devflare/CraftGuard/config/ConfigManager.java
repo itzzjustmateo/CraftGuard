@@ -7,9 +7,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Manages configuration files for CraftGuard plugin
@@ -22,8 +22,8 @@ public class ConfigManager {
     private FileConfiguration worldsConfig;
     private File worldsFile;
 
-    // Cache for world states (performance optimization)
-    private final Map<String, Boolean> worldStatesCache = new HashMap<>();
+    // Cache for world states (thread-safe for concurrent access)
+    private final Map<String, Boolean> worldStatesCache = new ConcurrentHashMap<>();
 
     public ConfigManager(CraftGuard plugin) {
         this.plugin = plugin;

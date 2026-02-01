@@ -7,26 +7,33 @@ import me.devflare.CraftGuard.placeholders.CraftGuardExpansion;
 import me.devflare.CraftGuard.utils.MessageUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.21.11-1.0.0-SNAPSHOT
+ * @version 1.21.11-1.0.2-SNAPSHOT
  */
 public final class CraftGuard extends JavaPlugin {
 
     private static CraftGuard instance;
     private ConfigManager configManager;
     private CraftGuardExpansion placeholderExpansion;
+    private CraftingListener craftingListener;
 
     @Override
     public void onEnable() {
+        // Warn if instance already exists (reload detection)
+        if (instance != null) {
+            getLogger().warning("CraftGuard instance already exists! This may indicate a reload issue.");
+        }
+
         // Set instance
         instance = this;
 
-        // Initialize message utility
+        // Initialize message utility (re-checks PAPI availability)
         MessageUtil.initialize();
 
         // Load configurations
@@ -44,8 +51,9 @@ public final class CraftGuard extends JavaPlugin {
             getLogger().severe(configManager.getMessage("command-registration-failed"));
         }
 
-        // Register event listener
-        Bukkit.getPluginManager().registerEvents(new CraftingListener(this), this);
+        // Register event listener (keep reference for cleanup)
+        craftingListener = new CraftingListener(this);
+        Bukkit.getPluginManager().registerEvents(craftingListener, this);
         getLogger().info(configManager.getMessage("listeners-registered"));
 
         // Register PlaceholderAPI expansion if available
@@ -67,12 +75,31 @@ public final class CraftGuard extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        // Unregister event listener explicitly
+        if (craftingListener != null) {
+            HandlerList.unregisterAll(craftingListener);
+            craftingListener = null;
+        }
+
         // Unregister PlaceholderAPI expansion
         if (placeholderExpansion != null) {
             placeholderExpansion.unregister();
+            placeholderExpansion = null;
         }
 
-        getLogger().info(configManager.getMessage("plugin-disabled"));
+        // Log shutdown message (null-safe)
+        if (configManager != null) {
+            getLogger().info(configManager.getMessage("plugin-disabled"));
+            configManager = null;
+        } else {
+            getLogger().info("CraftGuard has been disabled!");
+        }
+
+        // Reset MessageUtil static state
+        MessageUtil.reset();
+
+        // Clear static instance LAST
+        instance = null;
     }
 
     /**

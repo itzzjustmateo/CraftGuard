@@ -121,4 +121,12 @@ public class MessageUtil {
     public static boolean isPlaceholderAPIAvailable() {
         return placeholderAPIAvailable;
     }
+
+    /**
+     * Reset static state on plugin disable
+     * This prevents stale state after reload
+     */
+    public static void reset() {
+        placeholderAPIAvailable = false;
+    }
 }

@@ -16,11 +16,9 @@ import org.bukkit.event.inventory.CraftItemEvent;
  */
 public class CraftingListener implements Listener {
 
-    private final CraftGuard plugin;
     private final ConfigManager configManager;
 
     public CraftingListener(CraftGuard plugin) {
-        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 

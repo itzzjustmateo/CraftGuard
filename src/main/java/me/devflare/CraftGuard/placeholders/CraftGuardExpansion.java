@@ -38,7 +38,7 @@ public class CraftGuardExpansion extends PlaceholderExpansion {
 
     @Override
     public boolean persist() {
-        return true; // Keep expansion loaded even if plugin reloads
+        return false; // Re-register fresh expansion on each reload to avoid stale references
     }
 
     @Override
