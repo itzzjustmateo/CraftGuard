@@ -1,0 +1,134 @@
+# CraftGuard Configuration
+# Messages support both legacy color codes (&a, &c) and MiniMessage formatting (<green>, <red>)
+# Available placeholders: {world}, {state}, {player}
+# PlaceholderAPI placeholders are also supported if PlaceholderAPI is installed
+
+# Message prefix settings
+prefix:
+  # Enable/disable prefix for all messages
+  enabled: true
+
+  # The prefix to add to the front of all messages
+  # This will be added to command feedback and error messages (not console messages)
+  text: "&a[CraftGuard] &7"
+
+messages:
+  # Command feedback messages
+  crafting-enabled: "Crafting has been &aenabled &7in world &e{world}&7."
+  crafting-disabled: "Crafting has been &cdisabled &7in world &e{world}&7."
+  crafting-toggled: "Crafting in world &e{world} &7is now &e{state}&7."
+
+  # Error messages
+  no-permission: "You don't have permission to use this command."
+  world-not-found: "World &e{world} &7not found."
+  invalid-usage: "Usage: /cg [world] [on|off|toggle]"
+  console-must-specify-world: "This command must be run by a player or specify a world."
+
+  # Crafting attempt message (sent when player tries to craft in disabled world)
+  crafting-blocked: "Crafting is disabled in this world."
+
+  # Help command messages (displayed when running /cg or /cg help)
+  # Placeholders: {version}, {admin_permission}, {bypass_permission}
+  help:
+    - "&7&m                    &r &aCraftGuard &7v{version} &7&m                    "
+    - "&7A lightweight plugin to control crafting permissions per world."
+    - ""
+    - "&e&lCommands:"
+    - "&7  /cg &8- &7Show this help message"
+    - "&7  /cg help &8- &7Show this help message"
+    - "&7  /cg <world> on &8- &7Enable crafting in a world"
+    - "&7  /cg <world> off &8- &7Disable crafting in a world"
+    - "&7  /cg <world> toggle &8- &7Toggle crafting in a world"
+    - ""
+    - "&e&lPermissions:"
+    - "&7  {admin_permission} &8- &7Manage crafting settings"
+    - "&7  {bypass_permission} &8- &7Bypass crafting restrictions"
+    - "&7&m                                                              "
+
+  # Status messages (used in {state} placeholder)
+  status-enabled: "&aenabled"
+  status-disabled: "&cdisabled"
+
+  # Plugin startup/shutdown messages (console)
+  plugin-enabled: "CraftGuard v{version} has been enabled!"
+  plugin-disabled: "CraftGuard has been disabled!"
+  config-loaded: "Configuration loaded successfully."
+  commands-registered: "Commands registered: /craftguard, /cguard, /cg"
+  listeners-registered: "Event listeners registered."
+  placeholderapi-registered: "PlaceholderAPI expansion registered successfully."
+  placeholderapi-failed: "Failed to register PlaceholderAPI expansion."
+  placeholderapi-not-found: "PlaceholderAPI not found. Placeholders will not be available."
+  command-registration-failed: "Failed to register command! Check plugin.yml"
+
+# Settings
+settings:
+  # Send message to player when they try to craft in a disabled world
+  notify-on-craft-attempt: true
+
+  # Default crafting state for new worlds (true = enabled, false = disabled)
+  default-crafting-state: true
+
+  # Event priority for crafting listener
+  # Options: LOWEST, LOW, NORMAL, HIGH, HIGHEST, MONITOR
+  # HIGHEST is recommended to run after other plugins
+  event-priority: HIGHEST
+
+  # Ignore cancelled events (if another plugin already cancelled the crafting)
+  ignore-cancelled-events: true
+
+# Permissions (these are the permission nodes used by the plugin)
+# You can change these to match your server's permission structure
+permissions:
+  # Permission required to use commands
+  admin: "craftguard.admin"
+
+  # Permission to bypass crafting restrictions
+  bypass: "craftguard.bypass"
+
+# Command settings
+commands:
+  # Action aliases for enabling crafting
+  # Players can use any of these: /cg on, /cg enable, /cg true
+  enable-aliases:
+    - "on"
+    - "enable"
+    - "true"
+
+  # Action aliases for disabling crafting
+  # Players can use any of these: /cg off, /cg disable, /cg false
+  disable-aliases:
+    - "off"
+    - "disable"
+    - "false"
+
+  # Action aliases for toggling crafting
+  # Players can use any of these: /cg toggle, /cg switch
+  toggle-aliases:
+    - "toggle"
+
+  # Tab completion suggestions for actions (first argument)
+  # These will be suggested when players type /cg <TAB>
+  tab-complete-actions:
+    - "on"
+    - "off"
+    - "toggle"
+
+  # Include world names in tab completion
+  tab-complete-worlds: true
+
+  # Case-sensitive command arguments (not recommended)
+  case-sensitive: false
+
+# Advanced settings
+advanced:
+  # Enable debug logging (shows detailed information in console)
+  debug-mode: false
+
+  # Cache world states in memory for better performance
+  # Disabling this will read from worlds.yml every time (slower but uses less memory)
+  cache-world-states: true
+
+  # Auto-save interval for worlds.yml (in seconds)
+  # Set to 0 to save immediately on every change
+  # Set to -1 to disable auto-save (manual save only)
+  auto-save-interval: 0

@@ -1,0 +1,10 @@
+# CraftGuard World States
+# Format: world_name: true/false
+# true = crafting enabled, false = crafting disabled
+
+# Example worlds (these will be auto-generated when worlds are modified)
+# world: true
+# world_nether: true
+# world_the_end: true
+# skyblock: false
+# minigames: false

@@ -1,0 +1,30 @@
+name: CraftGuard
+version: "${project.version}"
+main: me.devflare.CraftGuard.CraftGuard
+api-version: "1.21"
+prefix: CraftGuard
+authors: [DevFlare, ItzzMateo]
+description: World-based crafting management for Minecraft servers
+website: https://itzzmateo.devflare.de
+
+commands:
+  craftguard:
+    description: Manage crafting permissions per world
+    usage: /<command> [world] [on|off|toggle]
+    aliases: [cguard, cg]
+    permission: craftguard.admin
+
+permissions:
+  craftguard.admin:
+    description: Allows access to CraftGuard commands
+    default: op
+  craftguard.bypass:
+    description: Bypass crafting restrictions
+    default: op
+
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
