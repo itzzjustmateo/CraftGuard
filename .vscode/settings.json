@@ -1,4 +1,35 @@
 {
     "java.compile.nullAnalysis.mode": "automatic",
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "cSpell.words": [
+        "aenabled",
+        "apdisk",
+        "Bukkit",
+        "cdisabled",
+        "cguard",
+        "cooldowns",
+        "craftguard",
+        "ctxt",
+        "devflare",
+        "donotpresent",
+        "ehthumbs",
+        "encryptable",
+        "esktop",
+        "ethumbs",
+        "fseventsd",
+        "Itzz",
+        "Kyori",
+        "Mateo",
+        "minigames",
+        "minimessage",
+        "msix",
+        "papermc",
+        "PAPI",
+        "placeholderapi",
+        "stackdump",
+        "strikethrough",
+        "timemachine",
+        "unregistration",
+        "worldname"
+    ]
 }
