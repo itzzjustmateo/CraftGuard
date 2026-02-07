@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.21.11-1.0.2-SNAPSHOT
+ * @version 1.1.0
  */
 public final class CraftGuard extends JavaPlugin {
 

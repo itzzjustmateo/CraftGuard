@@ -111,3 +111,6 @@ buildNumber.properties
 
 # Common working directory
 run/
+
+# Local development and project meta files (not needed in source control)
+COMMIT.md

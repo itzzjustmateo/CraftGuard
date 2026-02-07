@@ -59,6 +59,15 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
                 return true;
             }
 
+            // Check if it's reload command
+            if (args[0].equalsIgnoreCase("reload")) {
+                configManager.reloadConfigurations();
+                Component message = MessageUtil.format(
+                        configManager.getMessageWithPrefix("config-reloaded"));
+                sender.sendMessage(message);
+                return true;
+            }
+
             // /cg <action> - apply to current world
             // /cg <world> - toggle specified world
             if (sender instanceof Player player && configManager.isValidAction(args[0])) {
@@ -162,6 +171,7 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             // Suggest world names and actions
             List<String> suggestions = new ArrayList<>();
             suggestions.add("help");
+            suggestions.add("reload");
             suggestions.addAll(configManager.getTabCompleteActions());
 
             if (configManager.shouldTabCompleteWorlds()) {

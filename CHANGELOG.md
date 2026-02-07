@@ -15,9 +15,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Recipe-specific restrictions (blacklist/whitelist specific items)
 - Crafting cooldowns
 - World groups (apply settings to multiple worlds)
-- MySQL/SQLite support for world states
+- MySQL/SQLite/PostgreSQL/h2/MongoDB/MariaDB/Oracle backend for big networks
 - Global bypass mode for emergency situations
 - Advanced logging and staff alerts
+
+---
+
+## [1.1.0] - 2026-02-07
+
+### Added
+- **Reload Command**: Added `/cg reload` to reload configuration without restarting the server.
+  - Requires `craftguard.admin` permission.
+  - Reloads `config.yml` and `worlds.yml` instantly.
 
 ---
 
@@ -147,16 +156,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Quick Feature Matrix
 
-| Feature | v1.0.0 | v1.0.1 |
-|---------|--------|--------|
-| Per-World Control | ✅ | ✅ |
-| Configurable Messages | ✅ | ✅ |
-| Message Prefix System | ✅ | ✅ |
-| PlaceholderAPI Support | ✅ | ✅ |
-| Debug Mode | ✅ | ✅ |
-| Tab Completion | ✅ | ✅ |
-| Help Command | ❌ | ✅ |
-| List-Based Help Config | ❌ | ✅ |
+| Feature                | v1.0.0 | v1.0.1 | v1.0.2 | v1.1.0 |
+|------------------------|--------|--------|--------|--------|
+| Per-World Control      | ✅     | ✅     | ✅     | ✅     |
+| Configurable Messages  | ✅     | ✅     | ✅     | ✅     |
+| Message Prefix System  | ✅     | ✅     | ✅     | ✅     |
+| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     |
+| Debug Mode             | ✅     | ✅     | ✅     | ✅     |
+| Tab Completion         | ✅     | ✅     | ✅     | ✅     |
+| Help Command           | ❌     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ❌     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ❌     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ❌     | ✅     | ✅     |
+| Java 21 Support        | ✅     | ✅     | ✅     | ✅     |
+| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     |
+| Reload Command         | ❌     | ❌     | ❌     | ✅     |
+
 
 ---
 

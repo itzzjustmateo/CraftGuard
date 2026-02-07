@@ -1,6 +1,7 @@
 name: CraftGuard
 version: "${project.version}"
 main: me.devflare.CraftGuard.CraftGuard
+api: "1.21"
 api-version: "1.21"
 prefix: CraftGuard
 authors: [DevFlare, ItzzMateo]

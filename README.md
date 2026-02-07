@@ -1,13 +1,12 @@
-# CraftGuard
-
 <div align="center">
 
-![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.0.0-brightgreen?style=for-the-badge)
+# CraftGuard
+![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.1.0-brightgreen?style=for-the-badge)
 [![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-**A lightweight, highly configurable Minecraft plugin for managing crafting permissions on a per-world basis.**
+**Tired of players crafting where you don't want them to? CraftGuard lets you control crafting, world by world.**
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration) • [For Developers](#-for-developers)
 
@@ -15,255 +14,218 @@
 
 ---
 
-## 📋 Overview
+## 📋 What is CraftGuard?
 
-CraftGuard is a powerful yet simple plugin that gives server administrators complete control over crafting permissions in different worlds. Whether you want to disable crafting in minigame worlds, lobby areas, or specific survival worlds, CraftGuard makes it easy with an intuitive command system and 100% configurable options.
+CraftGuard is a simple plugin that lets you turn crafting on or off for specific worlds in your Minecraft server. If you’re running minigames, creative hubs, or want extra control in survival, this plugin makes it easy—with clear commands and tons of customization.
 
-### Why CraftGuard?
+### Why use CraftGuard?
 
-- ✅ **Lightweight** - Minimal performance impact with smart caching
-- ✅ **100% Configurable** - Every message, permission, and setting can be customized
-- ✅ **Per-World Control** - Enable or disable crafting in specific worlds
-- ✅ **PlaceholderAPI Support** - Integrate with your existing placeholder system
-- ✅ **Modern Formatting** - Supports both legacy color codes and MiniMessage
-- ✅ **Developer Friendly** - Clean, well-documented code with Maven build system
+- ⚡ **Lightweight** – Won’t slow down your server
+- 🎛️ **Fully Customizable** – Tweak every message, permission, and setting
+- 🌎 **Choose Your Worlds** – Decide exactly where crafting can happen
+- 🧩 **PlaceholderAPI Support** – Easy integration with other plugins and leaderboards
+- 🎨 **Modern Chat Formatting** – Color codes and MiniMessage support
+- 👨‍💻 **Dev-Friendly** – Source is tidy, readable, and built with Maven
 
 ---
 
 ## ✨ Features
 
-### Core Features
+**Core**
 
-- **Per-World Crafting Control** - Enable, disable, or toggle crafting in any world
-- **Bypass Permissions** - Allow specific players to craft regardless of world settings
-- **Configurable Messages** - Customize all messages with color codes and MiniMessage
-- **Message Prefix System** - Global prefix for all messages with enable/disable toggle
-- **Tab Completion** - Smart suggestions for commands and world names
-- **Debug Mode** - Detailed logging for troubleshooting
-- **PlaceholderAPI Integration** - Custom placeholders for other plugins
+- Toggle crafting in any world—on, off, or toggle with a simple command
+- Grant bypass permissions to certain players so they can always craft
+- All messages can be edited (including colors, MiniMessage, etc.)
+- Message prefix system (enable/disable globally)
+- Tab-completion for commands and world names
+- Debug mode for pinpointing plugin problems
+- Seamless PlaceholderAPI integration
 
-### Advanced Configuration
+**Advanced Settings**
 
-- **Custom Permissions** - Define your own permission nodes
-- **Action Aliases** - Customize command syntax (on/off/enable/disable/toggle)
-- **Event Priority** - Control when CraftGuard checks crafting events
-- **Caching Options** - Performance tuning for large servers
-- **Auto-Save Settings** - Configure when world states are saved
+- Customizable permission nodes
+- Change command action words (on/off/enable/etc)
+- Set plugin event priority—choose when CraftGuard checks crafting
+- Caching & auto-save tweaks for large servers
 
 ---
 
-## 📦 Installation
+## 📦 How to Install
 
-### Requirements
+**Requirements**
 
-- **Minecraft Server**: Paper 1.21.11 or higher
-- **Java**: 21 or higher
-- **Optional**: PlaceholderAPI (for placeholder support)
+- **Paper** 1.21.11 or newer
+- **Java** 21+
+- (Optional) PlaceholderAPI for advanced placeholders
 
 ### Quick Start
 
-1. **Download** the latest `craftguard-1.21.11-1.0.0-SNAPSHOT.jar` from [Releases](../../releases)
-2. **Place** the JAR file in your server's `plugins/` folder
+1. **Download** the latest `craftguard-1.1.0.jar` from [Releases](../../releases)
+2. **Put** it in your server's `plugins/` folder
 3. **Restart** your server
-4. **Configure** the plugin in `plugins/CraftGuard/config.yml`
-5. **Enjoy!** Use `/cg help` to see available commands
+4. **Edit** the config: `plugins/CraftGuard/config.yml`
+5. **Ready!** Use `/cg help` for commands
 
-### First-Time Setup
+### What’s created automatically
 
-After installation, CraftGuard will create two configuration files:
+- `config.yml` — main settings & messages
+- `worlds.yml` — current crafting states for each world
 
-- `config.yml` - Messages, settings, permissions, and advanced options
-- `worlds.yml` - Per-world crafting states (auto-generated)
-
-By default, crafting is **enabled** in all worlds. Use `/cg <world> off` to disable crafting in specific worlds.
+By default, crafting is allowed everywhere. Use `/cg <world> off` to lock down crafting in a world.
 
 ---
 
 ## 🎮 Commands
 
-### Main Command
+**Base command:** `/craftguard` (or `/cguard`, `/cg`)
 
-All commands use the base command `/craftguard` (aliases: `/cguard`, `/cg`)
+| Command                  | What it does                | Who can do it           |
+|--------------------------|-----------------------------|-------------------------|
+| `/cg` or `/cg help`      | Shows help menu             | Everyone                |
+| `/cg <world> on`         | Allow crafting in a world   | `craftguard.admin`      |
+| `/cg <world> off`        | Block crafting in a world   | `craftguard.admin`      |
+| `/cg <world> toggle`     | Flip crafting on/off        | `craftguard.admin`      |
 
-| Command | Description | Permission |
-|---------|-------------|------------|
-| `/cg` | Show help information | None |
-| `/cg help` | Show help information | None |
-| `/cg <world> on` | Enable crafting in a world | `craftguard.admin` |
-| `/cg <world> off` | Disable crafting in a world | `craftguard.admin` |
-| `/cg <world> toggle` | Toggle crafting in a world | `craftguard.admin` |
-
-### Command Examples
+### Some command examples
 
 ```bash
-# Show help
+# Show help:
 /cg
 /cg help
 
-# Enable crafting in the world "survival"
+# Enable crafting for "survival"
 /cg survival on
 /cg survival enable
 /cg survival true
 
-# Disable crafting in the world "minigames"
+# Disable crafting for "minigames"
 /cg minigames off
 /cg minigames disable
 /cg minigames false
 
-# Toggle crafting in the world "lobby"
+# Toggle crafting for "lobby"
 /cg lobby toggle
 ```
 
 ### Permissions
 
-| Permission | Description | Default |
-|------------|-------------|---------|
-| `craftguard.admin` | Manage crafting settings | OP |
-| `craftguard.bypass` | Bypass crafting restrictions | OP |
+| Permission             | What it does                    | Default |
+|------------------------|----------------------------------|---------|
+| `craftguard.admin`     | Manage settings                  | OP      |
+| `craftguard.bypass`    | Ignore crafting restrictions     | OP      |
 
-> **Note**: Permission nodes can be customized in `config.yml`
+> You can rename permission nodes in your config if you want.
 
 ---
 
 ## ⚙️ Configuration
 
-### Basic Configuration
-
-The `config.yml` file is fully documented with comments. Here's a quick overview:
+The default config (`config.yml`) is commented throughout, but here’s the basics:
 
 ```yaml
-# Message prefix (appears before all player messages)
 prefix:
   enabled: true
   text: "&a[CraftGuard] &7"
 
-# Customize all messages
 messages:
   crafting-enabled: "Crafting has been &aenabled &7in world &e{world}&7."
   crafting-disabled: "Crafting has been &cdisabled &7in world &e{world}&7."
-  # ... and many more
+  #More message options...
 
-# Plugin settings
 settings:
   notify-on-craft-attempt: true
   default-crafting-state: true
   event-priority: HIGHEST
 
-# Custom permissions
 permissions:
   admin: "craftguard.admin"
   bypass: "craftguard.bypass"
 
-# Advanced options
 advanced:
   debug-mode: false
   cache-world-states: true
   auto-save-interval: 0
 ```
 
-### Configuration Guides
+**Need help configuring?**  
+Check:
 
-For detailed configuration examples and guides, see:
-
-- [Configuration Guide](docs/CONFIGURATION.md) - Complete configuration reference
-- [Message Prefix Guide](docs/PREFIX.md) - Customize message prefixes
-- [PlaceholderAPI Guide](docs/PLACEHOLDERS.md) - Using placeholders
+- [Full Configuration Guide](docs/CONFIGURATION.md)
+- [Message Prefix Help](docs/PREFIX.md)
+- [PlaceholderAPI Guide](docs/PLACEHOLDERS.md)
 
 ---
 
-## 🔌 PlaceholderAPI Integration
+## 🔌 PlaceholderAPI Support
 
-CraftGuard provides custom placeholders when PlaceholderAPI is installed:
+If PlaceholderAPI is installed, you can use these placeholders:
 
-| Placeholder | Description | Example Output |
-|-------------|-------------|----------------|
-| `%craftguard_world%` | Current world name | `world` |
-| `%craftguard_world_state%` | Current world crafting state | `enabled` |
-| `%craftguard_world_<worldname>%` | Specific world state | `disabled` |
+| Placeholder                       | What it shows            | Example   |
+|------------------------------------|--------------------------|-----------|
+| `%craftguard_world%`               | Player’s current world   | `world`   |
+| `%craftguard_world_state%`         | Crafting enabled/disabled| `enabled` |
+| `%craftguard_world_<worldname>%`   | State for specific world | `disabled`|
 
-### Example Usage
+**Example:**
 
 ```yaml
-# In another plugin's config
+# To show on a scoreboard:
 scoreboard-line: "Crafting: %craftguard_world_state%"
 ```
 
 ---
 
-## 👨‍💻 For Developers
+## 👨‍💻 Developers
 
-### Building from Source
+### Building CraftGuard from source
 
-#### Prerequisites
+You’ll need:
 
 - Java 21 JDK
 - Maven 3.6+
 - Git
 
-#### Clone and Build
-
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/CraftGuard.git
 cd CraftGuard
-
-# Build with Maven
 mvn clean package
-
-# The compiled JAR will be in target/
-# craftguard-1.21.11-1.0.0-SNAPSHOT.jar
+# Find the JAR in target/
 ```
 
-### Project Structure
+#### Plugin folder structure
 
 ```
 CraftGuard/
 ├── src/main/java/me/devflare/CraftGuard/
-│   ├── CraftGuard.java              # Main plugin class
-│   ├── commands/
-│   │   └── CraftGuardCommand.java   # Command handler
-│   ├── config/
-│   │   └── ConfigManager.java       # Configuration management
-│   ├── listeners/
-│   │   └── CraftingListener.java    # Event listener
-│   ├── placeholders/
-│   │   └── CraftGuardExpansion.java # PlaceholderAPI integration
-│   └── utils/
-│       └── MessageUtil.java         # Message formatting
+│   ├── CraftGuard.java              # Main plugin
+│   ├── commands/                    # Command logic
+│   ├── config/                      # Config access
+│   ├── listeners/                   # Event listeners
+│   ├── placeholders/                # PlaceholderAPI expansion
+│   └── utils/                       # Utility code
 ├── src/main/resources/
-│   ├── config.yml                   # Default configuration
-│   ├── worlds.yml                   # World states template
-│   └── paper-plugin.yml             # Plugin metadata
-└── pom.xml                          # Maven configuration
+│   ├── config.yml
+│   ├── worlds.yml
+│   └── paper-plugin.yml
+└── pom.xml
 ```
 
-### Key Classes
+#### Useful classes
 
-#### CraftGuard.java
-Main plugin class handling initialization and lifecycle management.
+- **CraftGuard.java** – Plugin startup/shutdown, registers everything.
+- **ConfigManager.java** – Loads/caches config and world state. Example methods:
+  - `isCraftingEnabled(String world)`
+  - `setCraftingEnabled(String world, boolean enabled)`
+  - `getMessageWithPrefix(String path)`
+  - `getAdminPermission()`
+  - `isDebugMode()`
+- **CraftGuardCommand.java** – Handles commands/tab completion.
+- **CraftingListener.java** – Cancels crafting as needed.
+- **MessageUtil.java** – Color/placeholder/minimessage formatting.
 
-#### ConfigManager.java
-Manages configuration files, caching, and provides methods to access all settings.
+#### Using as a dependency
 
-**Key Methods:**
-- `isCraftingEnabled(String world)` - Check if crafting is enabled
-- `setCraftingEnabled(String world, boolean enabled)` - Set crafting state
-- `getMessageWithPrefix(String path)` - Get formatted message with prefix
-- `getAdminPermission()` - Get admin permission node
-- `isDebugMode()` - Check if debug logging is enabled
-
-#### CraftGuardCommand.java
-Handles all command execution and tab completion.
-
-#### CraftingListener.java
-Listens to `CraftItemEvent` and enforces crafting restrictions.
-
-#### MessageUtil.java
-Formats messages with color codes, MiniMessage, and PlaceholderAPI support.
-
-### API Usage
-
-While CraftGuard doesn't currently expose a public API, you can interact with it through PlaceholderAPI or by adding it as a dependency:
+CraftGuard doesn’t have a formal API, but you can depend on it or use its placeholders.
 
 ```xml
 <dependency>
@@ -274,121 +236,247 @@ While CraftGuard doesn't currently expose a public API, you can interact with it
 </dependency>
 ```
 
-Then access the plugin instance:
-
+Basic plugin access example:
 ```java
 CraftGuard plugin = (CraftGuard) Bukkit.getPluginManager().getPlugin("CraftGuard");
 ConfigManager config = plugin.getConfigManager();
-
-// Check if crafting is enabled in a world
 boolean enabled = config.isCraftingEnabled("world");
-
-// Enable crafting in a world
 config.setCraftingEnabled("world", true);
 ```
 
-### Contributing
+### Want to contribute?
 
-Contributions are welcome! Please follow these guidelines:
+If you find a bug or have a cool idea, open a pull request or a GitHub issue.
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
-3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
-4. **Push** to the branch (`git push origin feature/amazing-feature`)
-5. **Open** a Pull Request
+1. Fork & clone this repo
+2. Create a branch (`git checkout -b your-feature`)
+3. Make changes & commit
+4. Push branch and submit PR
 
-#### Code Style
+**Coding Tips:**
 
-- Use 4 spaces for indentation
-- Follow Java naming conventions
-- Add JavaDoc comments for public methods
-- Keep methods focused and concise
+- 4 spaces for indentation
+- Use standard Java naming
+- Add JavaDoc for public methods
+- Keep your methods short and direct
 
-#### Testing
-
-Before submitting a PR:
-- Build the project (`mvn clean package`)
-- Test on a Paper 1.21.11 server
-- Verify all commands work as expected
-- Check that configuration changes are backward compatible
+**Testing:**  
+- Make sure it builds (`mvn clean package`)
+- Test it yourself on Paper 1.21.11
+- Check all commands/configs behave correctly
 
 ---
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This plugin uses the MIT License—see [LICENSE](LICENSE) for all legalese.
 
 ---
 
-## 🤝 Support
+## 🤝 Support & Feedback
 
-### Getting Help
+**How to get help:**
 
-- **Issues**: [GitHub Issues](../../issues)
-- **Discussions**: [GitHub Discussions](../../discussions)
-- **Discord**: [Join our Discord](#) *(coming soon)*
+- **Bugs or Issues?** [GitHub Issues](../../issues)
+- **Chat or Suggest Ideas:** [Discussions](../../discussions)
+- **Discord:** Coming soon
 
-### Reporting Bugs
+**Reporting a Bug:**  
+When reporting, please tell us:
+- Your CraftGuard version
+- Your Paper version
+- Your Java version
+- How to reproduce the bug
+- What happened and what you expected
+- Relevant config entries
+- Any errors in your console
 
-When reporting bugs, please include:
-
-1. CraftGuard version
-2. Paper version
-3. Java version
-4. Steps to reproduce
-5. Expected vs actual behavior
-6. Relevant config sections
-7. Console errors (if any)
-
-### Feature Requests
-
-Have an idea? Open a [feature request](../../issues/new?labels=enhancement) with:
-
-- Clear description of the feature
-- Use case / why it's needed
-- Example configuration (if applicable)
+**Feature requests:**  
+Open an [enhancement issue](../../issues/new?labels=enhancement) and explain your idea and how you’d use it.
 
 ---
 
 ## 🎯 Roadmap
 
-### Planned Features
+Here’s what’s on the horizon:
 
-- [ ] bStats integration for usage statistics
-- [ ] Public API for other plugins
-- [ ] In-game GUI for configuration
+- [ ] bStats usage tracking
+- [ ] Public plugin API
+- [ ] In-game GUI for settings
 - [ ] Per-player crafting permissions
-- [ ] Recipe-specific restrictions
+- [ ] Restrict specific recipes
 - [ ] Crafting cooldowns
-- [ ] World groups (apply settings to multiple worlds)
-- [ ] MySQL/SQLite support for world states
+- [ ] World group support (manage multiple worlds at once)
+- [ ] MySQL / SQLite / PostgreSQL / h2 / MongoDB / MariaDB / Oracle backend for big networks
 
-### Version History
-
-#### v1.0.0 (Current)
-- Initial release
-- Per-world crafting control
-- 100% configurable messages and settings
-- PlaceholderAPI integration
-- Message prefix system
-- Debug mode
-- Tab completion
+### Recent Versions
 
 ---
 
-## 🙏 Acknowledgments
+## [1.1.0] - 2026-02-07
 
-- **Paper Team** - For the excellent Paper API
-- **PlaceholderAPI** - For placeholder integration
-- **Kyori Adventure** - For modern text formatting
-- **Community** - For feedback and suggestions
+### Added
+- **Reload Command**: Added `/cg reload` to reload configuration without restarting the server.
+  - Requires `craftguard.admin` permission.
+  - Reloads `config.yml` and `worlds.yml`.
+  - Updates messages and settings instantly.
+
+---
+
+## [1.0.2] - 2026-02-01
+
+### Fixed
+
+- **Critical Lifecycle Issues**: Fixed memory leaks and stale references during plugin reloads
+  - Static instance now properly nullified on disable
+  - Explicit event listener unregistration to prevent duplicate events
+  - Added null-safe checks in `onDisable` to prevent crashes
+
+- **State Persistence Improvements**:
+  - Changed `worldStatesCache` to `ConcurrentHashMap` for thread safety
+  - Fixed PlaceholderAPI stale references by changing `persist()` to `false`
+  - Re-checks PAPI availability on every reload/enable
+
+- **Code Quality**:
+  - Removed unused imports and fields
+  - Updated versioning for consistency
+
+---
+
+## [1.0.1] - 2026-02-01
+
+### Added
+
+- **Help Command System**: Added `/cg` and `/cg help` commands that display plugin information
+  - Shows plugin version dynamically
+  - Lists all available commands
+  - Displays configured permission nodes
+  - Fully customizable help messages in config.yml as a list format
+  - Includes "help" in tab completion suggestions
+
+### Changed
+
+- **Help Messages Format**: Restructured help section in config.yml from individual keys to a cleaner list format
+  - Before: `help-header`, `help-description`, etc.
+  - After: Single `help:` list with all lines
+  - Easier to customize and maintain
+  - Supports empty lines with `""`
+- **Message Prefix Configuration**: Changed error message reference from `paper-plugin.yml` to `plugin.yml`
+- Updated version from `1.0.0-SNAPSHOT` to `1.0.1-SNAPSHOT`
+
+### Fixed
+
+- Improved consistency in configuration file documentation
+
+---
+
+## [1.0.0] - 2026-02-01
+
+### Added - Initial Release
+
+#### Core Features
+
+- **Per-World Crafting Control**: Enable, disable, or toggle crafting in any world
+  - `/cg <world> on` - Enable crafting in a world
+  - `/cg <world> off` - Disable crafting in a world
+  - `/cg <world> toggle` - Toggle crafting state
+- **Bypass Permissions**: Allow specific players to craft regardless of world settings
+- **Default Crafting State**: Configurable default state for new worlds
+
+#### Configuration System
+
+- **100% Configurable Messages**: All user-facing messages customizable in config.yml
+  - Support for legacy color codes (`&a`, `&c`, etc.)
+  - Support for MiniMessage formatting (`<green>`, `<red>`, etc.)
+  - Placeholder support: `{world}`, `{state}`, `{player}`, `{version}`
+- **Message Prefix System**: Global prefix for all player-facing messages
+  - Can be enabled/disabled via `prefix.enabled`
+  - Customizable prefix text
+  - Automatically excluded from console and status messages
+- **Custom Permissions**: Define your own permission nodes
+  - Configurable admin permission (default: `craftguard.admin`)
+  - Configurable bypass permission (default: `craftguard.bypass`)
+- **Command Aliases**: Customizable action words
+  - Enable aliases: `on`, `enable`, `true` (configurable)
+  - Disable aliases: `off`, `disable`, `false` (configurable)
+  - Toggle aliases: `toggle` (configurable)
+- **Event Configuration**:
+  - Configurable event priority (LOWEST to MONITOR)
+  - Option to ignore already-cancelled events
+- **Advanced Settings**:
+  - Debug mode for detailed logging
+  - World state caching for performance
+  - Configurable auto-save interval
+
+#### Commands & Permissions
+
+- **Main Command**: `/craftguard` with aliases `/cguard` and `/cg`
+- **Tab Completion**: Smart suggestions for worlds and actions
+  - Configurable action suggestions
+  - Option to include/exclude world names
+  - Case-insensitive matching
+- **Permissions**:
+  - `craftguard.admin` - Manage crafting settings (default: OP)
+  - `craftguard.bypass` - Bypass crafting restrictions (default: OP)
+
+#### PlaceholderAPI Integration
+
+- **Custom Placeholders** (requires PlaceholderAPI):
+  - `%craftguard_world%` - Current world name
+  - `%craftguard_world_state%` - Current world crafting state
+  - `%craftguard_world_<worldname>%` - Specific world state
+- **Soft Dependency**: Plugin works without PlaceholderAPI installed
+
+#### Technical Features
+
+- **Smart Caching**: World states cached in memory for performance
+- **Two Configuration Files**:
+  - `config.yml` - Messages, settings, permissions, advanced options
+  - `worlds.yml` - Per-world crafting states (auto-generated)
+- **Paper API 1.21.11** support
+- **Java 21** compatibility
+- **Maven Build System** with clean project structure
+- **Well-Documented Code**: JavaDoc comments for all public methods
+
+#### Console Messages
+
+- Configurable startup/shutdown messages
+- Configuration load confirmation
+- Command registration status
+- Event listener registration status
+- PlaceholderAPI integration status
+
+#### User Experience
+
+- **Notification System**: Players receive messages when trying to craft in disabled worlds
+  - Configurable via `notify-on-craft-attempt`
+- **Debug Logging**: Optional detailed logging for troubleshooting
+  - Command executions with world and action
+  - Blocked crafting attempts
+  - Permission bypass events
+- **Error Handling**: Clear error messages for invalid commands and missing worlds
+
+
+---
+
+## 🙏 Credits
+
+**Special thanks to everyone who contributed, directly or indirectly, to CraftGuard:**
+
+- **PaperMC Team** – For their outstanding server software that powers it all.
+- **PlaceholderAPI Developers** – For enabling seamless plugin integration and placeholders.
+- **Kyori Adventure Project** – For bringing beautiful, modern chat formatting to the Minecraft ecosystem.
+- **Community Testers & Feedback Providers** – Every player, server admin, and community member who reported bugs, suggested improvements, or supported the project with their ideas and encouragement.
+- **Open Source Contributors** – Those who have written code, improved docs, or helped with translations.
+- **All inspiration from the Minecraft plugin community** – Your creativity drives CraftGuard forward.
+
+*Thank you for helping make CraftGuard better for everyone!*
 
 ---
 
 <div align="center">
 
-**Made with ❤️ for the Minecraft community**
-
+**Built by Minecraft fans, for Minecraft fans**  
 [⬆ Back to Top](#craftguard)
 
 </div>
