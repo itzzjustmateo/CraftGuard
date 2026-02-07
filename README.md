@@ -1,7 +1,7 @@
 <div align="center">
 
 # CraftGuard
-![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.1.0-brightgreen?style=for-the-badge)
+![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.1.1-brightgreen?style=for-the-badge)
 [![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
@@ -60,7 +60,7 @@ CraftGuard is a simple plugin that lets you turn crafting on or off for specific
 
 ### Quick Start
 
-1. **Download** the latest `craftguard-1.1.0.jar` from [Releases](../../releases)
+1. **Download** the latest `craftguard-1.1.1.jar` from [Releases](../../releases)
 2. **Put** it in your server's `plugins/` folder
 3. **Restart** your server
 4. **Edit** the config: `plugins/CraftGuard/config.yml`

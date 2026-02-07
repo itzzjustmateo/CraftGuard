@@ -21,6 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.1.1] - 2026-02-07
+
+### Fixed
+- **Crafting Bypass Bug**: Changed default `craftguard.bypass` permission from `op` to `false`.
+  - Fixes issue where server operators could not test crafting restrictions.
+  - Operators now need to explicitly grant themselves the bypass permission.
+
+---
+
 ## [1.1.0] - 2026-02-07
 
 ### Added
@@ -156,7 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Quick Feature Matrix
 
-| Feature                | v1.0.0 | v1.0.1 | v1.0.2 | v1.1.0 |
+| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 |
 |------------------------|--------|--------|--------|--------|
 | Per-World Control      | ✅     | ✅     | ✅     | ✅     |
 | Configurable Messages  | ✅     | ✅     | ✅     | ✅     |
@@ -164,13 +173,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 | PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     |
 | Debug Mode             | ✅     | ✅     | ✅     | ✅     |
 | Tab Completion         | ✅     | ✅     | ✅     | ✅     |
-| Help Command           | ❌     | ✅     | ✅     | ✅     |
-| List-Based Help Config | ❌     | ✅     | ✅     | ✅     |
-| State Persistence Fix  | ❌     | ❌     | ✅     | ✅     |
-| Memory Leak Fixes      | ❌     | ❌     | ✅     | ✅     |
+| Help Command           | ✅     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ✅     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     |
 | Java 21 Support        | ✅     | ✅     | ✅     | ✅     |
 | Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     |
-| Reload Command         | ❌     | ❌     | ❌     | ✅     |
+| Reload Command         | ❌     | ❌     | ✅     | ✅     |
+| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     |
 
 
 ---

@@ -21,7 +21,7 @@ permissions:
     default: op
   craftguard.bypass:
     description: Bypass crafting restrictions
-    default: op
+    default: false
 
 dependencies:
   server:
