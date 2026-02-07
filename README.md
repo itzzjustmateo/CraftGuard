@@ -1,22 +1,25 @@
-<div align="center">
+<p align="center">
+  <h1 align="center">CraftGuard</h1>
+  <img src="https://img.shields.io/badge/CraftGuard-v1.1.1-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
+  <a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge" alt="Paper" /></a>
+  <a href="https://www.oracle.com/java/"><img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge" alt="Java" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>
+</p>
 
-# CraftGuard
-![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.1.1-brightgreen?style=for-the-badge)
-[![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
-[![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+> **⚠️ About FlameAntiCraft/FlameCraft**  
+> CraftGuard picks up where my old anti-crafting plugin, [FlameAntiCraft (FlameCraft)](https://modrinth.com/plugin/flameanticraft), left off.  
+> FlameAntiCraft/FlameCraft won’t get any more updates—if you want new features, improvements, or fixes, CraftGuard is the place to be!
 
 **Tired of players crafting where you don't want them to? CraftGuard lets you control crafting, world by world.**
 
 [Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration) • [For Developers](#-for-developers)
 
-</div>
-
 ---
 
 ## 📋 What is CraftGuard?
 
-CraftGuard is a simple plugin that lets you turn crafting on or off for specific worlds in your Minecraft server. If you’re running minigames, creative hubs, or want extra control in survival, this plugin makes it easy—with clear commands and tons of customization.
+CraftGuard is a simple plugin that lets you turn crafting on or off for specific worlds in your Minecraft server.
+If you’re running minigames, creative hubs, or want extra control in survival, this plugin makes it easy—with clear commands and tons of customization.
 
 ### Why use CraftGuard?
 
@@ -31,7 +34,7 @@ CraftGuard is a simple plugin that lets you turn crafting on or off for specific
 
 ## ✨ Features
 
-**Core**
+### Core
 
 - Toggle crafting in any world—on, off, or toggle with a simple command
 - Grant bypass permissions to certain players so they can always craft
@@ -41,7 +44,7 @@ CraftGuard is a simple plugin that lets you turn crafting on or off for specific
 - Debug mode for pinpointing plugin problems
 - Seamless PlaceholderAPI integration
 
-**Advanced Settings**
+### Advanced Settings
 
 - Customizable permission nodes
 - Change command action words (on/off/enable/etc)
@@ -52,7 +55,7 @@ CraftGuard is a simple plugin that lets you turn crafting on or off for specific
 
 ## 📦 How to Install
 
-**Requirements**
+### Requirements
 
 - **Paper** 1.21.11 or newer
 - **Java** 21+
@@ -71,7 +74,8 @@ CraftGuard is a simple plugin that lets you turn crafting on or off for specific
 - `config.yml` — main settings & messages
 - `worlds.yml` — current crafting states for each world
 
-By default, crafting is allowed everywhere. Use `/cg <world> off` to lock down crafting in a world.
+By default, crafting is allowed everywhere.
+Use `/cg <world> off` to lock down crafting in a world.
 
 ---
 
@@ -79,12 +83,12 @@ By default, crafting is allowed everywhere. Use `/cg <world> off` to lock down c
 
 **Base command:** `/craftguard` (or `/cguard`, `/cg`)
 
-| Command                  | What it does                | Who can do it           |
-|--------------------------|-----------------------------|-------------------------|
-| `/cg` or `/cg help`      | Shows help menu             | Everyone                |
-| `/cg <world> on`         | Allow crafting in a world   | `craftguard.admin`      |
-| `/cg <world> off`        | Block crafting in a world   | `craftguard.admin`      |
-| `/cg <world> toggle`     | Flip crafting on/off        | `craftguard.admin`      |
+| Command                  | What it does                 | Who can do it      |
+| :----------------------- | :--------------------------- | :----------------- |
+| `/cg` or `/cg help`      | Shows help menu              | Everyone           |
+| `/cg <world> on`         | Allow crafting in a world    | `craftguard.admin` |
+| `/cg <world> off`        | Block crafting in a world    | `craftguard.admin` |
+| `/cg <world> toggle`     | Flip crafting on/off         | `craftguard.admin` |
 
 ### Some command examples
 
@@ -109,10 +113,10 @@ By default, crafting is allowed everywhere. Use `/cg <world> off` to lock down c
 
 ### Permissions
 
-| Permission             | What it does                    | Default |
-|------------------------|----------------------------------|---------|
-| `craftguard.admin`     | Manage settings                  | OP      |
-| `craftguard.bypass`    | Ignore crafting restrictions     | OP      |
+| Permission           | What it does                  | Default |
+| :------------------- | :---------------------------- | :------ |
+| `craftguard.admin`   | Manage settings               | OP      |
+| `craftguard.bypass`  | Ignore crafting restrictions  | OP      |
 
 > You can rename permission nodes in your config if you want.
 
@@ -120,7 +124,7 @@ By default, crafting is allowed everywhere. Use `/cg <world> off` to lock down c
 
 ## ⚙️ Configuration
 
-The default config (`config.yml`) is commented throughout, but here’s the basics:
+The default config (`config.yml`) is commented throughout, but here's the basics:
 
 ```yaml
 prefix:
@@ -130,7 +134,7 @@ prefix:
 messages:
   crafting-enabled: "Crafting has been &aenabled &7in world &e{world}&7."
   crafting-disabled: "Crafting has been &cdisabled &7in world &e{world}&7."
-  #More message options...
+  # More message options...
 
 settings:
   notify-on-craft-attempt: true
@@ -160,11 +164,11 @@ Check:
 
 If PlaceholderAPI is installed, you can use these placeholders:
 
-| Placeholder                       | What it shows            | Example   |
-|------------------------------------|--------------------------|-----------|
-| `%craftguard_world%`               | Player’s current world   | `world`   |
-| `%craftguard_world_state%`         | Crafting enabled/disabled| `enabled` |
-| `%craftguard_world_<worldname>%`   | State for specific world | `disabled`|
+| Placeholder                     | What it shows                | Example    |
+| :------------------------------ | :--------------------------- | :--------- |
+| `%craftguard_world%`            | Player’s current world       | `world`    |
+| `%craftguard_world_state%`      | Crafting enabled/disabled    | `enabled`  |
+| `%craftguard_world_<worldname>%`| State for specific world     | `disabled` |
 
 **Example:**
 
@@ -177,9 +181,9 @@ scoreboard-line: "Crafting: %craftguard_world_state%"
 
 ## 👨‍💻 Developers
 
-### Building CraftGuard from source
+### Building CraftGuard from Source
 
-You’ll need:
+You'll need:
 
 - Java 21 JDK
 - Maven 3.6+
@@ -192,9 +196,9 @@ mvn clean package
 # Find the JAR in target/
 ```
 
-#### Plugin folder structure
+#### Plugin Folder Structure
 
-```
+```plaintext
 CraftGuard/
 ├── src/main/java/me/devflare/CraftGuard/
 │   ├── CraftGuard.java              # Main plugin
@@ -210,7 +214,7 @@ CraftGuard/
 └── pom.xml
 ```
 
-#### Useful classes
+#### Useful Classes
 
 - **CraftGuard.java** – Plugin startup/shutdown, registers everything.
 - **ConfigManager.java** – Loads/caches config and world state. Example methods:
@@ -223,20 +227,21 @@ CraftGuard/
 - **CraftingListener.java** – Cancels crafting as needed.
 - **MessageUtil.java** – Color/placeholder/minimessage formatting.
 
-#### Using as a dependency
+#### Using as a Dependency
 
 CraftGuard doesn’t have a formal API, but you can depend on it or use its placeholders.
 
 ```xml
 <dependency>
-    <groupId>me.devflare</groupId>
-    <artifactId>craftguard</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <scope>provided</scope>
+  <groupId>me.devflare</groupId>
+  <artifactId>craftguard</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <scope>provided</scope>
 </dependency>
 ```
 
 Basic plugin access example:
+
 ```java
 CraftGuard plugin = (CraftGuard) Bukkit.getPluginManager().getPlugin("CraftGuard");
 ConfigManager config = plugin.getConfigManager();
@@ -244,7 +249,7 @@ boolean enabled = config.isCraftingEnabled("world");
 config.setCraftingEnabled("world", true);
 ```
 
-### Want to contribute?
+### Want to Contribute?
 
 If you find a bug or have a cool idea, open a pull request or a GitHub issue.
 
@@ -275,14 +280,16 @@ This plugin uses the MIT License—see [LICENSE](LICENSE) for all legalese.
 
 ## 🤝 Support & Feedback
 
-**How to get help:**
+### How to Get Help
 
 - **Bugs or Issues?** [GitHub Issues](../../issues)
 - **Chat or Suggest Ideas:** [Discussions](../../discussions)
 - **Discord:** Coming soon
 
-**Reporting a Bug:**  
+#### Reporting a Bug
+
 When reporting, please tell us:
+
 - Your CraftGuard version
 - Your Paper version
 - Your Java version
@@ -291,14 +298,15 @@ When reporting, please tell us:
 - Relevant config entries
 - Any errors in your console
 
-**Feature requests:**  
+#### Feature Requests
+
 Open an [enhancement issue](../../issues/new?labels=enhancement) and explain your idea and how you’d use it.
 
 ---
 
 ## 🎯 Roadmap
 
-Here’s what’s on the horizon:
+Here's what's on the horizon:
 
 - [ ] bStats usage tracking
 - [ ] Public plugin API
@@ -316,6 +324,7 @@ Here’s what’s on the horizon:
 ## [1.1.0] - 2026-02-07
 
 ### Added
+
 - **Reload Command**: Added `/cg reload` to reload configuration without restarting the server.
   - Requires `craftguard.admin` permission.
   - Reloads `config.yml` and `worlds.yml`.
@@ -456,7 +465,6 @@ Here’s what’s on the horizon:
   - Permission bypass events
 - **Error Handling**: Clear error messages for invalid commands and missing worlds
 
-
 ---
 
 ## 🙏 Credits
@@ -474,9 +482,7 @@ Here’s what’s on the horizon:
 
 ---
 
-<div align="center">
-
-**Built by Minecraft fans, for Minecraft fans**  
-[⬆ Back to Top](#craftguard)
-
-</div>
+<p align="center">
+  <strong>Built by Minecraft fans, for Minecraft fans</strong><br>
+  <a href="#craftguard">⬆ Back to Top</a>
+</p>
