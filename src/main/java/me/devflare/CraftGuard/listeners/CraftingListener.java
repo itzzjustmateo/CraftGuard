@@ -24,30 +24,33 @@ public class CraftingListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onCraftItem(CraftItemEvent event) {
-        // Check if player has bypass permission
-        if (event.getWhoClicked() instanceof Player player) {
-            if (player.hasPermission(configManager.getBypassPermission())) {
-                configManager.debug("Player " + player.getName() + " bypassed crafting restriction");
-                return;
-            }
+        if (!(event.getWhoClicked() instanceof Player player))
+            return;
 
-            // Get player's world
-            String worldName = player.getWorld().getName();
+        // Check for bypass permissions (Specific or All)
+        if (player.hasPermission(configManager.getBypassPermission("crafting")) ||
+                player.hasPermission(configManager.getBypassAllPermission())) {
+            configManager.debug("Player " + player.getName() + " bypassed crafting restriction");
+            return;
+        }
 
-            // Check if crafting is disabled in this world
-            if (!configManager.isCraftingEnabled(worldName)) {
-                // Cancel the crafting event
-                event.setCancelled(true);
-                configManager.debug("Blocked crafting for " + player.getName() + " in world: " + worldName);
+        // Get player's world
+        String worldName = player.getWorld().getName();
 
-                // Send notification if enabled
-                if (configManager.shouldNotifyOnCraftAttempt()) {
-                    Component message = MessageUtil.format(
-                            configManager.getMessageWithPrefix("crafting-blocked"),
-                            null,
-                            player);
-                    player.sendMessage(message);
-                }
+        // Check if crafting is disabled in this world
+        if (!configManager.isFeatureEnabled(worldName, "crafting")) {
+            // Cancel the crafting event
+            event.setCancelled(true);
+            configManager.debug("Blocked crafting for " + player.getName() + " in world: " + worldName);
+
+            // Send notification if enabled
+            if (configManager.shouldNotifyOnBlock()) {
+                String typeName = configManager.getTypeName("crafting");
+                String messageStr = configManager.getMessageWithPrefix("feature-blocked")
+                        .replace("{type}", typeName);
+
+                Component message = MessageUtil.format(messageStr, null, player);
+                player.sendMessage(message);
             }
         }
     }

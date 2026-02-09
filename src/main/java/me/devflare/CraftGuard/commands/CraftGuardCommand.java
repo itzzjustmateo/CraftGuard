@@ -15,18 +15,21 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * Command handler for /craftguard (aliases: /cguard, /cg)
- * Manages crafting permissions per world
+ * Manages feature permissions per world
  */
 public class CraftGuardCommand implements CommandExecutor, TabCompleter {
 
     private final CraftGuard plugin;
     private final ConfigManager configManager;
+    private final List<String> actionAliases = Arrays.asList("on", "off", "toggle", "enable", "disable", "true",
+            "false");
 
     public CraftGuardCommand(CraftGuard plugin) {
         this.plugin = plugin;
@@ -44,52 +47,39 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        // Determine world and action
-        String worldName;
-        String action;
-
         if (args.length == 0) {
-            // /cg - show help
             sendHelpMessage(sender);
             return true;
-        } else if (args.length == 1) {
-            // Check if it's help command
-            if (args[0].equalsIgnoreCase("help") || args[0].equals("?")) {
-                sendHelpMessage(sender);
-                return true;
-            }
+        }
 
-            // Check if it's reload command
-            if (args[0].equalsIgnoreCase("reload")) {
-                configManager.reloadConfigurations();
-                Component message = MessageUtil.format(
-                        configManager.getMessageWithPrefix("config-reloaded"));
-                sender.sendMessage(message);
-                return true;
-            }
+        // Handle subcommands
+        String firstArg = args[0].toLowerCase();
+        if (firstArg.equals("help") || firstArg.equals("?")) {
+            sendHelpMessage(sender);
+            return true;
+        }
 
-            // /cg <action> - apply to current world
-            // /cg <world> - toggle specified world
-            if (sender instanceof Player player && configManager.isValidAction(args[0])) {
-                worldName = player.getWorld().getName();
-                action = args[0].toLowerCase();
-            } else {
-                worldName = args[0];
-                action = "toggle";
-            }
-        } else if (args.length == 2) {
-            // /cg <world> <action>
-            worldName = args[0];
-            action = args[1].toLowerCase();
-        } else {
-            // Too many arguments
+        if (firstArg.equals("reload")) {
+            configManager.reloadConfigurations();
+            Component message = MessageUtil.format(
+                    configManager.getMessageWithPrefix("config-reloaded"));
+            sender.sendMessage(message);
+            return true;
+        }
+
+        // New syntax: /cg <world> <type> <action>
+        if (args.length < 2) {
             Component message = MessageUtil.format(
                     configManager.getMessageWithPrefix("invalid-usage"));
             sender.sendMessage(message);
             return true;
         }
 
-        // Validate world exists
+        String worldName = args[0];
+        String type = args[1].toLowerCase();
+        String action = args.length >= 3 ? args[2].toLowerCase() : "toggle";
+
+        // Validate world
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
             Component message = MessageUtil.format(
@@ -99,24 +89,24 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
+        // Validate type
+        if (!configManager.getRegisteredTypes().contains(type) && !type.equals("crafting")) {
+            Component message = MessageUtil.format(
+                    configManager.getMessageWithPrefix("invalid-type"));
+            sender.sendMessage(message);
+            return true;
+        }
+
         // Execute action
         boolean newState;
-        String messageKey;
-
-        if (configManager.isEnableAction(action)) {
-            configManager.setCraftingEnabled(worldName, true);
+        if (isEnableAction(action)) {
+            configManager.setFeatureEnabled(worldName, type, true);
             newState = true;
-            messageKey = "crafting-enabled";
-            configManager.debug("Enabled crafting in world: " + worldName);
-        } else if (configManager.isDisableAction(action)) {
-            configManager.setCraftingEnabled(worldName, false);
+        } else if (isDisableAction(action)) {
+            configManager.setFeatureEnabled(worldName, type, false);
             newState = false;
-            messageKey = "crafting-disabled";
-            configManager.debug("Disabled crafting in world: " + worldName);
-        } else if (configManager.isToggleAction(action)) {
-            newState = configManager.toggleCrafting(worldName);
-            messageKey = "crafting-toggled";
-            configManager.debug("Toggled crafting in world: " + worldName + " to " + newState);
+        } else if (isToggleAction(action)) {
+            newState = configManager.toggleFeature(worldName, type);
         } else {
             Component message = MessageUtil.format(
                     configManager.getMessageWithPrefix("invalid-usage"));
@@ -124,15 +114,20 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        // Send feedback message
+        // Send feedback
         String stateText = newState ? configManager.getMessage("status-enabled")
                 : configManager.getMessage("status-disabled");
+        String typeName = configManager.getTypeName(type);
+
+        String messageKey = action.contains("toggle") ? "feature-toggled"
+                : (newState ? "feature-enabled" : "feature-disabled");
 
         Component message = MessageUtil.format(
                 configManager.getMessageWithPrefix(messageKey),
                 Map.of(
                         "world", worldName,
                         "state", stateText,
+                        "type", typeName,
                         "player", sender.getName()),
                 sender instanceof Player ? (Player) sender : null);
         sender.sendMessage(message);
@@ -140,22 +135,25 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
         return true;
     }
 
-    /**
-     * Send help message to the command sender
-     */
+    private boolean isEnableAction(String action) {
+        return action.equals("on") || action.equals("enable") || action.equals("true");
+    }
+
+    private boolean isDisableAction(String action) {
+        return action.equals("off") || action.equals("disable") || action.equals("false");
+    }
+
+    private boolean isToggleAction(String action) {
+        return action.equals("toggle");
+    }
+
     private void sendHelpMessage(CommandSender sender) {
         String version = plugin.getPluginMeta().getVersion();
-
-        // Get help messages from config
         List<String> helpLines = configManager.getHelpMessages();
 
-        // Send each line with placeholders replaced
         for (String line : helpLines) {
             String formatted = line
-                    .replace("{version}", version)
-                    .replace("{admin_permission}", configManager.getAdminPermission())
-                    .replace("{bypass_permission}", configManager.getBypassPermission());
-
+                    .replace("{version}", version);
             sender.sendMessage(MessageUtil.format(formatted));
         }
     }
@@ -168,28 +166,24 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
         }
 
         if (args.length == 1) {
-            // Suggest world names and actions
-            List<String> suggestions = new ArrayList<>();
-            suggestions.add("help");
-            suggestions.add("reload");
-            suggestions.addAll(configManager.getTabCompleteActions());
-
-            if (configManager.shouldTabCompleteWorlds()) {
-                suggestions.addAll(Bukkit.getWorlds().stream()
-                        .map(World::getName)
-                        .collect(Collectors.toList()));
-            }
-
-            return suggestions.stream()
-                    .filter(s -> s.toLowerCase().startsWith(args[0].toLowerCase()))
-                    .collect(Collectors.toList());
+            List<String> suggestions = new ArrayList<>(Arrays.asList("help", "reload"));
+            suggestions.addAll(Bukkit.getWorlds().stream().map(World::getName).collect(Collectors.toList()));
+            return filterSuggestions(suggestions, args[0]);
         } else if (args.length == 2) {
-            // Suggest actions for specified world
-            return configManager.getTabCompleteActions().stream()
-                    .filter(s -> s.toLowerCase().startsWith(args[1].toLowerCase()))
-                    .collect(Collectors.toList());
+            List<String> suggestions = new ArrayList<>(configManager.getRegisteredTypes());
+            if (!suggestions.contains("crafting"))
+                suggestions.add("crafting");
+            return filterSuggestions(suggestions, args[1]);
+        } else if (args.length == 3) {
+            return filterSuggestions(Arrays.asList("on", "off", "toggle"), args[2]);
         }
 
         return new ArrayList<>();
+    }
+
+    private List<String> filterSuggestions(List<String> suggestions, String input) {
+        return suggestions.stream()
+                .filter(s -> s.toLowerCase().startsWith(input.toLowerCase()))
+                .collect(Collectors.toList());
     }
 }

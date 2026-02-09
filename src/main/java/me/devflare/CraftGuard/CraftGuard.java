@@ -3,6 +3,8 @@ package me.devflare.CraftGuard;
 import me.devflare.CraftGuard.commands.CraftGuardCommand;
 import me.devflare.CraftGuard.config.ConfigManager;
 import me.devflare.CraftGuard.listeners.CraftingListener;
+import me.devflare.CraftGuard.listeners.PortalListener;
+import me.devflare.CraftGuard.listeners.WorkstationListener;
 import me.devflare.CraftGuard.placeholders.CraftGuardExpansion;
 import me.devflare.CraftGuard.utils.MessageUtil;
 import org.bukkit.Bukkit;
@@ -14,7 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.1.1
+ * @version 1.2.0
  */
 public final class CraftGuard extends JavaPlugin {
 
@@ -22,6 +24,8 @@ public final class CraftGuard extends JavaPlugin {
     private ConfigManager configManager;
     private CraftGuardExpansion placeholderExpansion;
     private CraftingListener craftingListener;
+    private PortalListener portalListener;
+    private WorkstationListener workstationListener;
 
     @Override
     public void onEnable() {
@@ -51,9 +55,8 @@ public final class CraftGuard extends JavaPlugin {
             getLogger().severe(configManager.getMessage("command-registration-failed"));
         }
 
-        // Register event listener (keep reference for cleanup)
-        craftingListener = new CraftingListener(this);
-        Bukkit.getPluginManager().registerEvents(craftingListener, this);
+        // Register event listeners
+        registerListeners();
         getLogger().info(configManager.getMessage("listeners-registered"));
 
         // Register PlaceholderAPI expansion if available
@@ -75,10 +78,18 @@ public final class CraftGuard extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Unregister event listener explicitly
+        // Unregister event listeners
         if (craftingListener != null) {
             HandlerList.unregisterAll(craftingListener);
             craftingListener = null;
+        }
+        if (portalListener != null) {
+            HandlerList.unregisterAll(portalListener);
+            portalListener = null;
+        }
+        if (workstationListener != null) {
+            HandlerList.unregisterAll(workstationListener);
+            workstationListener = null;
         }
 
         // Unregister PlaceholderAPI expansion
@@ -103,7 +114,21 @@ public final class CraftGuard extends JavaPlugin {
     }
 
     /**
+     * Register all event listeners
+     */
+    private void registerListeners() {
+        craftingListener = new CraftingListener(this);
+        portalListener = new PortalListener(this);
+        workstationListener = new WorkstationListener(this);
+
+        Bukkit.getPluginManager().registerEvents(craftingListener, this);
+        Bukkit.getPluginManager().registerEvents(portalListener, this);
+        Bukkit.getPluginManager().registerEvents(workstationListener, this);
+    }
+
+    /**
      * Get the plugin instance
+     * 
      * 
      * @return CraftGuard instance
      */

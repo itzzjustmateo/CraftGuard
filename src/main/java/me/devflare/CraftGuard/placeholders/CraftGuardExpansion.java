@@ -53,15 +53,35 @@ public class CraftGuardExpansion extends PlaceholderExpansion {
             if (player == null)
                 return "";
             String worldName = player.getWorld().getName();
-            boolean enabled = configManager.isCraftingEnabled(worldName);
+            boolean enabled = configManager.isFeatureEnabled(worldName, "crafting");
             return enabled ? "enabled" : "disabled";
         }
 
-        // %craftguard_world_<worldname>% - Crafting state for specific world
-        if (params.startsWith("world_")) {
-            String worldName = params.substring(6); // Remove "world_" prefix
-            boolean enabled = configManager.isCraftingEnabled(worldName);
+        // %craftguard_world_state_<type>% - State for a specific type in current world
+        if (params.startsWith("world_state_")) {
+            if (player == null)
+                return "";
+            String type = params.substring(12).toLowerCase();
+            String worldName = player.getWorld().getName();
+            boolean enabled = configManager.isFeatureEnabled(worldName, type);
             return enabled ? "enabled" : "disabled";
+        }
+
+        // %craftguard_world_<worldname>_<type>% - Specific world and specific type
+        if (params.startsWith("world_")) {
+            String sub = params.substring(6);
+            int lastUnderscore = sub.lastIndexOf('_');
+
+            if (lastUnderscore != -1) {
+                String worldName = sub.substring(0, lastUnderscore);
+                String type = sub.substring(lastUnderscore + 1);
+                boolean enabled = configManager.isFeatureEnabled(worldName, type);
+                return enabled ? "enabled" : "disabled";
+            } else {
+                // Old format: %craftguard_world_<worldname>% defaults to crafting
+                boolean enabled = configManager.isFeatureEnabled(sub, "crafting");
+                return enabled ? "enabled" : "disabled";
+            }
         }
 
         return null; // Placeholder not recognized

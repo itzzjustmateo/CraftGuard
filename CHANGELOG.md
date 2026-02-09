@@ -5,23 +5,31 @@ All notable changes to CraftGuard will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.2.0] - 2026-02-09
 
-### Planned Features
-- bStats integration for usage statistics
-- Public API for other plugins
-- In-game GUI for configuration
-- Per-player crafting permissions
-- Recipe-specific restrictions (blacklist/whitelist specific items)
-- Crafting cooldowns
-- World groups (apply settings to multiple worlds)
-- MySQL/SQLite/PostgreSQL/h2/MongoDB/MariaDB/Oracle backend for big networks
-- Global bypass mode for emergency situations
-- Advanced logging and staff alerts
+### Added
+- **Granular Feature Control**: Every workstation and portal now has its own toggle.
+  - Supported types: `crafting`, `nether-portal`, `end-portal`, `anvil`, `furnace`, `blast-furnace`, `smoker`, `enchanting`, `brewing`, `smithing`, `loom`, `cartography`, `grindstone`, `stonecutter`.
+- **New Command Syntax**: Updated `/cg <world> <type> <on|off|toggle>` for better clarity and control.
+- **Split Portal Control**: Nether and End portals can now be toggled independently.
+- **New Listeners**: Implemented `PortalListener` and `WorkstationListener` for broad feature blocking.
+- **Granular Bypass Permissions**: Fixed permissions to `craftguard.bypass.<type>` or `craftguard.bypass.*`.
+- **Granular Placeholders**: Added new PAPI placeholders for all feature types.
+  - `%craftguard_world_state_<type>%`
+  - `%craftguard_world_<worldname>_<type>%`
+
+### Changed
+- **Hardcoded Permissions**: Permissions are now hardcoded and removed from `config.yml` for consistency.
+- **Redesigned Help Menu**: cleaner layout and better readability.
+- **World State Migration**: automatically migrates existing `worlds.yml` to the new granular format.
+
+### Fixed
+- Improved command validation and error messaging.
 
 ---
 
 ## [1.1.1] - 2026-02-07
+
 
 ### Fixed
 - **Crafting Bypass Bug**: Changed default `craftguard.bypass` permission from `op` to `false`.

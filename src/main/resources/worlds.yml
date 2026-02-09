@@ -1,10 +1,15 @@
 # CraftGuard World States
-# Format: world_name: true/false
-# true = crafting enabled, false = crafting disabled
+# -----------------------------------------
+# world_name:
+#   feature_type: true/false
+#
+# Types: crafting, nether-portal, end-portal, anvil, furnace, etc.
 
-# Example worlds (these will be auto-generated when worlds are modified)
-# world: true
-# world_nether: true
-# world_the_end: true
-# skyblock: false
-# minigames: false
+world:
+  crafting: true
+  nether-portal: true
+  anvil: false
+
+world_nether:
+  nether-portal: true
+  furnace: true

@@ -3,128 +3,87 @@
 # All user-facing messages and plugin settings can be modified here.
 #
 # Color codes: Supports both legacy codes (&a, &c, etc.) and MiniMessage tags (<green>, <red>).
-# Placeholders: {world}, {state}, {player} (for dynamic values in messages).
-# If PlaceholderAPI is installed, additional PAPI placeholders are usable (e.g., %player_name%).
-#
+# Placeholders: {world}, {state}, {type}, {player}
+# Types: crafting, nether-portal, end-portal, anvil, furnace, etc.
 
 # Controls the prefix shown at the start of all player-facing messages
 prefix:
-  # Set to false to remove the prefix from all messages sent to players
   enabled: true
-
-  # The actual prefix text added to all player feedback and error messages
-  # NOTE: This is NOT shown in console messages
   text: "<green>CraftGuard</green> "
 
 messages:
   # Messages sent to players on command success
-  crafting-enabled: "Crafting has been &aenabled &7in world &e{world}&7."
-  crafting-disabled: "Crafting has been &cdisabled &7in world &e{world}&7."
-  crafting-toggled: "Crafting in world &e{world} &7is now &e{state}&7."
+  feature-enabled: "{type} has been &aenabled &7in world &e{world}&7."
+  feature-disabled: "{type} has been &cdisabled &7in world &e{world}&7."
+  feature-toggled: "{type} in world &e{world} &7is now &e{state}&7."
 
   # Error messages shown to players
   no-permission: "You don't have permission to use this command."
   world-not-found: "World &e{world} &7not found."
-  invalid-usage: "Usage: /cg [world] [on|off|toggle]"
+  invalid-usage: "Usage: /cg <world> <type> <on|off|toggle>"
+  invalid-type: "Invalid type! Use: crafting, nether-portal, end-portal, anvil, furnace, enchanting, etc."
   console-must-specify-world: "This command must be run by a player or specify a world."
 
-  # Message shown when a player tries to craft in a disabled world
-  crafting-blocked: "Crafting is disabled in this world."
+  # Message shown when a player tries to use a blocked feature
+  feature-blocked: "{type} is disabled in this world."
 
-  # Help command output, shown for /cg or /cg help
-  # Placeholders: {version} = plugin version, {admin_permission}, {bypass_permission}, {world}
-  # Additional PAPI placeholders may be used if PlaceholderAPI is present (e.g. %player_name%)
+  # Help command output
   help:
-    - "<green>CraftGuard &7v{version}</green>"
-    - "<gray>Manage crafting per world on your server.</gray>"
-    - "<yellow>Usage:</yellow>"
-    - "<aqua>/cg help</aqua> &7- Show this help"
-    - "<aqua>/cg <world> on|off|toggle</aqua> &7- Set crafting in a world"
+    - "<dark_gray>------------------[ <green>CraftGuard Help</green> ]------------------</dark_gray>"
+    - "<yellow>Commands:</yellow>"
+    - " <aqua>/cg <world> <type> <on|off|toggle></aqua>"
+    - " <gray>» Manage features (e.g. anvil, nether-portal, crafting)</gray>"
+    - " <aqua>/cg reload</aqua> <gray>» Reload configurations</gray>"
+    - " <aqua>/cg help</aqua> <gray>» Show this menu</gray>"
     - "<yellow>Permissions:</yellow>"
-    - "<gray>Admin: <blue>{admin_permission}</blue></gray>"
-    - "<gray>Bypass: <blue>{bypass_permission}</blue></gray>"
+    - " <gray>Admin: <blue>craftguard.admin</blue></gray>"
+    - " <gray>Bypass: <blue>craftguard.bypass.<type></blue> or <blue>craftguard.bypass.*</blue></gray>"
+    - "<dark_gray>-----------------------------------------------------</dark_gray>"
 
-  # Status fragments for use in {state} placeholders above
+  # Status fragments
   status-enabled: "&aenabled"
   status-disabled: "&cdisabled"
 
-  # Console-only messages, not affected by prefix setting
+  # Feature type names (how they appear in messages)
+  type-names:
+    crafting: "Crafting"
+    nether-portal: "Nether Portal"
+    end-portal: "End Portal"
+    anvil: "Anvil"
+    furnace: "Furnace"
+    blast-furnace: "Blast Furnace"
+    smoker: "Smoker"
+    enchanting: "Enchanting"
+    brewing: "Brewing"
+    smithing: "Smithing"
+    loom: "Loom"
+    cartography: "Cartography"
+    grindstone: "Grindstone"
+    stonecutter: "Stonecutter"
+
+  # Console-only messages
   plugin-enabled: "CraftGuard v{version} has been enabled!"
   config-reloaded: "&aConfiguration reloaded successfully."
   plugin-disabled: "CraftGuard has been disabled!"
   config-loaded: "Configuration loaded successfully."
-  commands-registered: "Commands registered: /craftguard, /cguard, /cg"
+  commands-registered: "Commands registered: /cg"
   listeners-registered: "Event listeners registered."
   placeholderapi-registered: "PlaceholderAPI expansion registered successfully."
   placeholderapi-failed: "Failed to register PlaceholderAPI expansion."
-  placeholderapi-not-found: "PlaceholderAPI not found. Placeholders will not be available."
-  command-registration-failed: "Failed to register command! Check plugin.yml"
+  placeholderapi-not-found: "PlaceholderAPI not found."
 
 # General plugin behavior settings
 settings:
-  # If true, notifies a player when they attempt to craft but crafting is disabled in their world
-  notify-on-craft-attempt: true
+  notify-on-block: true
 
-  # Default state for new worlds (true to allow crafting, false to block crafting by default)
-  default-crafting-state: true
+  # Default state for any feature in a new world
+  default-state: true
 
-  # Determines when the crafting listener processes events relative to other plugins.
-  # Options (in order of execution): LOWEST, LOW, NORMAL, HIGH, HIGHEST, MONITOR
-  # HIGHEST is recommended to ensure most other plugins run first.
   event-priority: HIGHEST
-
-  # If true, ignores crafting events that have already been cancelled by another plugin
   ignore-cancelled-events: true
 
-# Permission node names used in permission checks
-# You may change these values to match your server's permission structure
-permissions:
-  # Permission node required to use CraftGuard commands (default: craftguard.admin)
-  admin: "craftguard.admin"
-
-  # Permission node required to bypass crafting restrictions (default: craftguard.bypass)
-  bypass: "craftguard.bypass"
-
-# Configuration for command handling and tab completion
-commands:
-  # Words that act as aliases for enabling crafting via command: /cg <alias>
-  enable-aliases:
-    - "on"
-    - "enable"
-    - "true"
-
-  # Words that act as aliases for disabling crafting via command: /cg <alias>
-  disable-aliases:
-    - "off"
-    - "disable"
-    - "false"
-
-  # Words that act as aliases for toggling the crafting state: /cg <alias>
-  toggle-aliases:
-    - "toggle"
-
-  # List of suggestions for the first argument when using tab completion on /cg
-  tab-complete-actions:
-    - "on"
-    - "off"
-    - "toggle"
-
-  # If true, world names will be shown in tab-completion for /cg <world>
-  tab-complete-worlds: true
-
-  # If true, command arguments are treated as case-sensitive (not recommended for most servers)
-  case-sensitive: false
-
-# Advanced technical settings for experienced server administrators
+# Advanced technical settings
 advanced:
-  # Enable detailed debug logging (information about command execution, listener events, bypasses, etc.)
   debug-mode: false
-
-  # If true, keeps world crafting states cached in memory for better performance.
-  # If false, reads world state from 'worlds.yml' every time (can reduce memory usage in large networks).
   cache-world-states: true
-
-  # Auto-save interval (in seconds) for 'worlds.yml'.
-  # 0 = Save immediately after every change.
-  # -1 = Disable automatic saving. Changes are only saved when using a manual save.
   auto-save-interval: 0
