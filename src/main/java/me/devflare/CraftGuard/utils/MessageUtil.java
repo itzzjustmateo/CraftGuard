@@ -36,10 +36,13 @@ public class MessageUtil {
      * @return Formatted Adventure Component
      */
     public static Component format(String message, Map<String, String> placeholders, Player player) {
-        // Replace custom placeholders
+        // Replace custom placeholders (supports both {key} and <key> syntax)
         if (placeholders != null) {
             for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                message = message.replace("{" + entry.getKey() + "}", entry.getValue());
+                String key = entry.getKey();
+                String value = entry.getValue();
+                message = message.replace("{" + key + "}", value);
+                message = message.replace("<" + key + ">", value);
             }
         }
 

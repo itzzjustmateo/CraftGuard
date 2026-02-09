@@ -7,7 +7,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -304,5 +303,14 @@ public class ConfigManager {
         if (isDebugMode()) {
             plugin.getLogger().info("[DEBUG] " + message);
         }
+    }
+
+    /**
+     * Shutdown the manager and clear caches
+     */
+    public void shutdown() {
+        worldStatesCache.clear();
+        config = null;
+        worldsConfig = null;
     }
 }

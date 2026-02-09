@@ -41,7 +41,7 @@ public class WorkstationListener implements Listener {
         materialToType.put(Material.FURNACE, "furnace");
         materialToType.put(Material.BLAST_FURNACE, "blast-furnace");
         materialToType.put(Material.SMOKER, "smoker");
-        materialToType.put(Material.CRAFTING_TABLE, "crafting-table");
+        materialToType.put(Material.CRAFTING_TABLE, "crafting");
         materialToType.put(Material.ENCHANTING_TABLE, "enchanting");
         materialToType.put(Material.BREWING_STAND, "brewing");
         materialToType.put(Material.SMITHING_TABLE, "smithing");
@@ -55,7 +55,7 @@ public class WorkstationListener implements Listener {
         inventoryToType.put(InventoryType.FURNACE, "furnace");
         inventoryToType.put(InventoryType.BLAST_FURNACE, "blast-furnace");
         inventoryToType.put(InventoryType.SMOKER, "smoker");
-        inventoryToType.put(InventoryType.WORKBENCH, "crafting-table");
+        inventoryToType.put(InventoryType.WORKBENCH, "crafting");
         inventoryToType.put(InventoryType.ENCHANTING, "enchanting");
         inventoryToType.put(InventoryType.BREWING, "brewing");
         inventoryToType.put(InventoryType.SMITHING, "smithing");
@@ -106,10 +106,11 @@ public class WorkstationListener implements Listener {
 
             if (configManager.shouldNotifyOnBlock()) {
                 String typeName = configManager.getTypeName(type);
-                String messageStr = configManager.getMessageWithPrefix("feature-blocked")
-                        .replace("{type}", typeName);
+                String messageStr = configManager.getMessageWithPrefix("feature-blocked");
 
-                Component message = MessageUtil.format(messageStr, null, player);
+                Component message = MessageUtil.format(messageStr, Map.of(
+                        "world", worldName,
+                        "type", typeName), player);
                 player.sendMessage(message);
             }
         }

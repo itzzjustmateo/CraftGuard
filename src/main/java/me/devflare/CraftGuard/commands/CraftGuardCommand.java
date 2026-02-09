@@ -28,8 +28,6 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
 
     private final CraftGuard plugin;
     private final ConfigManager configManager;
-    private final List<String> actionAliases = Arrays.asList("on", "off", "toggle", "enable", "disable", "true",
-            "false");
 
     public CraftGuardCommand(CraftGuard plugin) {
         this.plugin = plugin;
@@ -39,13 +37,6 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
             @NotNull String label, @NotNull String[] args) {
-        // Check permission
-        if (!sender.hasPermission(configManager.getAdminPermission())) {
-            Component message = MessageUtil.format(
-                    configManager.getMessageWithPrefix("no-permission"));
-            sender.sendMessage(message);
-            return true;
-        }
 
         if (args.length == 0) {
             sendHelpMessage(sender);
@@ -56,6 +47,14 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
         String firstArg = args[0].toLowerCase();
         if (firstArg.equals("help") || firstArg.equals("?")) {
             sendHelpMessage(sender);
+            return true;
+        }
+
+        // Check permission for administrative actions
+        if (!sender.hasPermission(configManager.getAdminPermission())) {
+            Component message = MessageUtil.format(
+                    configManager.getMessageWithPrefix("no-permission"));
+            sender.sendMessage(message);
             return true;
         }
 

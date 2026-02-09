@@ -5,9 +5,30 @@ All notable changes to CraftGuard will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-02-09
+
+### Added
+
+- **Enhanced Placeholder Support**: Now supports both `{placeholder}` and `<placeholder>` formats in custom messages for greater flexibility.
+- **Maintenance**: Removed unused `skills` folder from the repository for cleaner organization.
+
+### Changed
+
+- **Help Command Accessibility**: `/cg` and `/cg help` can now be used by all players, regardless of their permissions.
+- **Unified Feature Naming**: Consolidated `crafting-table` and `crafting` under the single `crafting` feature key for consistency.
+
+### Fixed
+
+- **Message Placeholder Bug**: Resolved an issue where `{world}` and `{type}` placeholders were not being replaced correctly in "feature-blocked" messages.
+- **Resource Optimization**: Ensured explicit cache clearing and resource disposal occur during plugin disable or reload to prevent potential memory leaks.
+
+
+---
+
 ## [1.2.0] - 2026-02-09
 
 ### Added
+
 - **Granular Feature Control**: Every workstation and portal now has its own toggle.
   - Supported types: `crafting`, `nether-portal`, `end-portal`, `anvil`, `furnace`, `blast-furnace`, `smoker`, `enchanting`, `brewing`, `smithing`, `loom`, `cartography`, `grindstone`, `stonecutter`.
 - **New Command Syntax**: Updated `/cg <world> <type> <on|off|toggle>` for better clarity and control.
@@ -15,23 +36,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **New Listeners**: Implemented `PortalListener` and `WorkstationListener` for broad feature blocking.
 - **Granular Bypass Permissions**: Fixed permissions to `craftguard.bypass.<type>` or `craftguard.bypass.*`.
 - **Granular Placeholders**: Added new PAPI placeholders for all feature types.
-  - `%craftguard_world_state_<type>%`
-  - `%craftguard_world_<worldname>_<type>%`
 
 ### Changed
+
 - **Hardcoded Permissions**: Permissions are now hardcoded and removed from `config.yml` for consistency.
 - **Redesigned Help Menu**: cleaner layout and better readability.
 - **World State Migration**: automatically migrates existing `worlds.yml` to the new granular format.
 
 ### Fixed
+
 - Improved command validation and error messaging.
 
 ---
 
 ## [1.1.1] - 2026-02-07
 
-
 ### Fixed
+
 - **Crafting Bypass Bug**: Changed default `craftguard.bypass` permission from `op` to `false`.
   - Fixes issue where server operators could not test crafting restrictions.
   - Operators now need to explicitly grant themselves the bypass permission.
@@ -41,6 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2026-02-07
 
 ### Added
+
 - **Reload Command**: Added `/cg reload` to reload configuration without restarting the server.
   - Requires `craftguard.admin` permission.
   - Reloads `config.yml` and `worlds.yml` instantly.
@@ -50,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.2] - 2026-02-01
 
 ### Fixed
+
 - **Critical Lifecycle Issues**: Fixed memory leaks and stale references during plugin reloads
   - Static instance now properly nullified on disable
   - Explicit event listener unregistration to prevent duplicate events
@@ -67,6 +90,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2026-02-01
 
 ### Added
+
 - **Help Command System**: Added `/cg` and `/cg help` commands that display plugin information
   - Shows plugin version dynamically
   - Lists all available commands
@@ -75,6 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Includes "help" in tab completion suggestions
 
 ### Changed
+
 - **Help Messages Format**: Restructured help section in config.yml from individual keys to a cleaner list format
   - Before: `help-header`, `help-description`, etc.
   - After: Single `help:` list with all lines
@@ -84,6 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated version from `1.0.0-SNAPSHOT` to `1.0.1-SNAPSHOT`
 
 ### Fixed
+
 - Improved consistency in configuration file documentation
 
 ---
@@ -93,6 +119,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added - Initial Release
 
 #### Core Features
+
 - **Per-World Crafting Control**: Enable, disable, or toggle crafting in any world
   - `/cg <world> on` - Enable crafting in a world
   - `/cg <world> off` - Disable crafting in a world
@@ -101,6 +128,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Default Crafting State**: Configurable default state for new worlds
 
 #### Configuration System
+
 - **100% Configurable Messages**: All user-facing messages customizable in config.yml
   - Support for legacy color codes (`&a`, `&c`, etc.)
   - Support for MiniMessage formatting (`<green>`, `<red>`, etc.)
@@ -125,6 +153,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Configurable auto-save interval
 
 #### Commands & Permissions
+
 - **Main Command**: `/craftguard` with aliases `/cguard` and `/cg`
 - **Tab Completion**: Smart suggestions for worlds and actions
   - Configurable action suggestions
@@ -135,6 +164,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `craftguard.bypass` - Bypass crafting restrictions (default: OP)
 
 #### PlaceholderAPI Integration
+
 - **Custom Placeholders** (requires PlaceholderAPI):
   - `%craftguard_world%` - Current world name
   - `%craftguard_world_state%` - Current world crafting state
@@ -142,6 +172,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Soft Dependency**: Plugin works without PlaceholderAPI installed
 
 #### Technical Features
+
 - **Smart Caching**: World states cached in memory for performance
 - **Two Configuration Files**:
   - `config.yml` - Messages, settings, permissions, advanced options
@@ -152,6 +183,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Well-Documented Code**: JavaDoc comments for all public methods
 
 #### Console Messages
+
 - Configurable startup/shutdown messages
 - Configuration load confirmation
 - Command registration status
@@ -159,6 +191,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PlaceholderAPI integration status
 
 #### User Experience
+
 - **Notification System**: Players receive messages when trying to craft in disabled worlds
   - Configurable via `notify-on-craft-attempt`
 - **Debug Logging**: Optional detailed logging for troubleshooting
@@ -173,23 +206,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Quick Feature Matrix
 
-| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 |
-|------------------------|--------|--------|--------|--------|
-| Per-World Control      | ✅     | ✅     | ✅     | ✅     |
-| Configurable Messages  | ✅     | ✅     | ✅     | ✅     |
-| Message Prefix System  | ✅     | ✅     | ✅     | ✅     |
-| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     |
-| Debug Mode             | ✅     | ✅     | ✅     | ✅     |
-| Tab Completion         | ✅     | ✅     | ✅     | ✅     |
-| Help Command           | ✅     | ✅     | ✅     | ✅     |
-| List-Based Help Config | ✅     | ✅     | ✅     | ✅     |
-| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     |
-| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     |
-| Java 21 Support        | ✅     | ✅     | ✅     | ✅     |
-| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     |
-| Reload Command         | ❌     | ❌     | ✅     | ✅     |
-| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     |
-
+| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 |
+|------------------------|--------|--------|--------|--------|--------|--------|
+| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
+| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
+| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
+| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
 
 ---
 
@@ -200,6 +234,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 No breaking changes. Your existing configuration will continue to work. However, you may want to:
 
 1. **Update help messages** (optional): The new list format is cleaner:
+
    ```yaml
    # Old format still works, but new format is recommended:
    messages:
@@ -232,7 +267,10 @@ No breaking changes. Your existing configuration will continue to work. However,
 
 ---
 
-[Unreleased]: https://github.com/itzzmateo/CraftGuard/compare/v1.0.2...HEAD
+[1.2.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.1.1...v1.2.0
+[1.1.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.0.2...v1.1.0
 [1.0.2]: https://github.com/itzzmateo/CraftGuard/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/itzzmateo/CraftGuard/releases/tag/v1.0.0

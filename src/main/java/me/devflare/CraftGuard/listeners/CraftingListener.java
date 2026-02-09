@@ -10,6 +10,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 
+import java.util.Map;
+
 /**
  * Listener for crafting events
  * Blocks crafting in worlds where it is disabled
@@ -46,10 +48,11 @@ public class CraftingListener implements Listener {
             // Send notification if enabled
             if (configManager.shouldNotifyOnBlock()) {
                 String typeName = configManager.getTypeName("crafting");
-                String messageStr = configManager.getMessageWithPrefix("feature-blocked")
-                        .replace("{type}", typeName);
+                String messageStr = configManager.getMessageWithPrefix("feature-blocked");
 
-                Component message = MessageUtil.format(messageStr, null, player);
+                Component message = MessageUtil.format(messageStr, Map.of(
+                        "world", worldName,
+                        "type", typeName), player);
                 player.sendMessage(message);
             }
         }

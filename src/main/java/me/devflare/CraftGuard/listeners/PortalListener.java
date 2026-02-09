@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import java.util.Map;
+
 /**
  * Listener for portal events
  * Blocks portal usage in worlds where it is disabled
@@ -57,10 +59,11 @@ public class PortalListener implements Listener {
 
             if (configManager.shouldNotifyOnBlock()) {
                 String typeName = configManager.getTypeName(type);
-                String messageStr = configManager.getMessageWithPrefix("feature-blocked")
-                        .replace("{type}", typeName);
+                String messageStr = configManager.getMessageWithPrefix("feature-blocked");
 
-                Component message = MessageUtil.format(messageStr, null, player);
+                Component message = MessageUtil.format(messageStr, Map.of(
+                        "world", worldName,
+                        "type", typeName), player);
                 player.sendMessage(message);
             }
         }

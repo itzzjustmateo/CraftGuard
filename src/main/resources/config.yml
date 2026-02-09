@@ -13,19 +13,20 @@ prefix:
 
 messages:
   # Messages sent to players on command success
-  feature-enabled: "{type} has been &aenabled &7in world &e{world}&7."
-  feature-disabled: "{type} has been &cdisabled &7in world &e{world}&7."
-  feature-toggled: "{type} in world &e{world} &7is now &e{state}&7."
+  feature-enabled: "<green>{type}</green> has been <bold><a>enabled</a></bold> <gray>in world <e>{world}</e>.</gray>"
+  feature-disabled: "<red>{type}</red> has been <bold><c>disabled</c></bold> <gray>in world <e>{world}</e>.</gray>"
+  feature-toggled: "<yellow>{type}</yellow> in world <e>{world}</e> is now <bold>{state}</bold>."
 
   # Error messages shown to players
-  no-permission: "You don't have permission to use this command."
-  world-not-found: "World &e{world} &7not found."
-  invalid-usage: "Usage: /cg <world> <type> <on|off|toggle>"
-  invalid-type: "Invalid type! Use: crafting, nether-portal, end-portal, anvil, furnace, enchanting, etc."
-  console-must-specify-world: "This command must be run by a player or specify a world."
+  no-permission: "<red>You do not have permission to use this command.</red>"
+  world-not-found: "<red>World <yellow>{world}</yellow> was not found.</red>"
+  invalid-usage: "<red>Incorrect usage!</red> <gray>Correct syntax: /cg &l<world> &l<type> &l<on|off|toggle></gray>"
+  invalid-type: "<red>Unknown type specified!</red> <gray>Available types:</gray> <yellow>crafting, nether-portal, end-portal, anvil, furnace, enchanting, etc.</yellow>"
+  console-must-specify-world: "<red>This command must be run by a player or include a world name.</red>"
 
   # Message shown when a player tries to use a blocked feature
-  feature-blocked: "{type} is disabled in this world."
+  feature-blocked: "<red>{type}</red> is <bold>disabled</bold> in <yellow>{world}</yellow>. <gray>You cannot use it here.</gray>"
+
 
   # Help command output
   help:
@@ -40,9 +41,10 @@ messages:
     - " <gray>Bypass: <blue>craftguard.bypass.<type></blue> or <blue>craftguard.bypass.*</blue></gray>"
     - "<dark_gray>-----------------------------------------------------</dark_gray>"
 
-  # Status fragments
-  status-enabled: "&aenabled"
-  status-disabled: "&cdisabled"
+  # Status fragments (used for dynamic state messages, supports color and emphasis)
+  status-enabled: "<green><bold>ENABLED</bold></green>"
+  status-disabled: "<red><bold>DISABLED</bold></red>"
+
 
   # Feature type names (how they appear in messages)
   type-names:
@@ -62,15 +64,15 @@ messages:
     stonecutter: "Stonecutter"
 
   # Console-only messages
-  plugin-enabled: "CraftGuard v{version} has been enabled!"
-  config-reloaded: "&aConfiguration reloaded successfully."
-  plugin-disabled: "CraftGuard has been disabled!"
-  config-loaded: "Configuration loaded successfully."
-  commands-registered: "Commands registered: /cg"
-  listeners-registered: "Event listeners registered."
-  placeholderapi-registered: "PlaceholderAPI expansion registered successfully."
-  placeholderapi-failed: "Failed to register PlaceholderAPI expansion."
-  placeholderapi-not-found: "PlaceholderAPI not found."
+  plugin-enabled: "CraftGuard v{version} has started successfully and is now active."
+  config-reloaded: "&aCraftGuard configuration reloaded successfully."
+  plugin-disabled: "CraftGuard has been disabled and all features are now inactive."
+  config-loaded: "Settings and configuration loaded for CraftGuard."
+  commands-registered: "Registered command: /cg"
+  listeners-registered: "All event listeners for CraftGuard are now active."
+  placeholderapi-registered: "PlaceholderAPI integration enabled for CraftGuard."
+  placeholderapi-failed: "Could not register PlaceholderAPI expansion. Placeholder support will be disabled."
+  placeholderapi-not-found: "PlaceholderAPI not detected; placeholder support is unavailable."
 
 # General plugin behavior settings
 settings:
