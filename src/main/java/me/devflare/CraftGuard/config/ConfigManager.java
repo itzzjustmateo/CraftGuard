@@ -7,7 +7,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class ConfigManager {
     private static final String BYPASS_ALL = "craftguard.bypass.*";
 
     // Cache for world states: WorldName -> (FeatureType -> Enabled)
-    private final Map<String, Map<String, Boolean>> worldStatesCache = new ConcurrentHashMap<>();
+    private final Map<String, ConcurrentHashMap<String, Boolean>> worldStatesCache = new ConcurrentHashMap<>();
 
     public ConfigManager(CraftGuard plugin) {
         this.plugin = plugin;
@@ -78,7 +77,7 @@ public class ConfigManager {
             if (worldsConfig.isBoolean(worldName)) {
                 // Old format migration: world: true -> world: { crafting: true }
                 boolean oldState = worldsConfig.getBoolean(worldName);
-                Map<String, Boolean> features = new HashMap<>();
+                ConcurrentHashMap<String, Boolean> features = new ConcurrentHashMap<>();
                 features.put("crafting", oldState);
                 worldStatesCache.put(worldName, features);
 
@@ -90,7 +89,7 @@ public class ConfigManager {
             } else if (worldsConfig.isConfigurationSection(worldName)) {
                 ConfigurationSection section = worldsConfig.getConfigurationSection(worldName);
                 if (section != null) {
-                    Map<String, Boolean> features = new HashMap<>();
+                    ConcurrentHashMap<String, Boolean> features = new ConcurrentHashMap<>();
                     for (String feature : section.getKeys(false)) {
                         features.put(feature.toLowerCase(), section.getBoolean(feature));
                     }
@@ -112,7 +111,7 @@ public class ConfigManager {
      * @return true if enabled, false if disabled
      */
     public boolean isFeatureEnabled(String worldName, String featureType) {
-        Map<String, Boolean> features = worldStatesCache.get(worldName);
+        ConcurrentHashMap<String, Boolean> features = worldStatesCache.get(worldName);
         if (features == null || !features.containsKey(featureType.toLowerCase())) {
             return getDefaultState();
         }
@@ -127,7 +126,8 @@ public class ConfigManager {
      * @param enabled     true to enable, false to disable
      */
     public void setFeatureEnabled(String worldName, String featureType, boolean enabled) {
-        Map<String, Boolean> features = worldStatesCache.computeIfAbsent(worldName, k -> new HashMap<>());
+        ConcurrentHashMap<String, Boolean> features = worldStatesCache.computeIfAbsent(worldName,
+                k -> new ConcurrentHashMap<>());
         features.put(featureType.toLowerCase(), enabled);
 
         worldsConfig.set(worldName + "." + featureType.toLowerCase(), enabled);

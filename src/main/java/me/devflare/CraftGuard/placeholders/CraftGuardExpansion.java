@@ -73,15 +73,20 @@ public class CraftGuardExpansion extends PlaceholderExpansion {
             int lastUnderscore = sub.lastIndexOf('_');
 
             if (lastUnderscore != -1) {
-                String worldName = sub.substring(0, lastUnderscore);
-                String type = sub.substring(lastUnderscore + 1);
-                boolean enabled = configManager.isFeatureEnabled(worldName, type);
-                return enabled ? "enabled" : "disabled";
-            } else {
-                // Old format: %craftguard_world_<worldname>% defaults to crafting
-                boolean enabled = configManager.isFeatureEnabled(sub, "crafting");
-                return enabled ? "enabled" : "disabled";
+                String worldNameCandidate = sub.substring(0, lastUnderscore);
+                String typeCandidate = sub.substring(lastUnderscore + 1).toLowerCase();
+
+                // Validate if it's a registered type
+                if (configManager.getRegisteredTypes().contains(typeCandidate)) {
+                    boolean enabled = configManager.isFeatureEnabled(worldNameCandidate, typeCandidate);
+                    return enabled ? "enabled" : "disabled";
+                }
             }
+
+            // If not a specific type, treat the whole sub as the worldName and default to
+            // crafting
+            boolean enabled = configManager.isFeatureEnabled(sub, "crafting");
+            return enabled ? "enabled" : "disabled";
         }
 
         return null; // Placeholder not recognized

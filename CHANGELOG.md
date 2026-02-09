@@ -5,6 +5,24 @@ All notable changes to CraftGuard will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-02-09
+
+### Added
+
+- **Smarter Placeholder Parsing**: Improved world name detection in PAPI placeholders to correctly handle world names containing underscores (e.g., `world_nether`, `my_custom_world`).
+- **Standardized Defaults**: Updated `worlds.yml` template to ensure features like `anvil` default to `true`, preventing accidental global blocks after installation.
+
+### Changed
+
+- **Thread-Safe Architecture**: Refactored `ConfigManager` to use `ConcurrentHashMap` for all internal world states, ensuring reliable performance in multi-threaded environments.
+- **Tab-Completion Logic**: Refined tab completion to prevent irrelevant feature suggestions when using subcommands like `help` or `reload`.
+- **Feature Consistency**: Standardized `crafting-table` and `crafting` under a unified `crafting` feature key across filters, listeners, and config.
+
+### Fixed
+
+- **Dead Code Cleanup**: Removed unused fields and redundant special-case checks in command validation to improve maintainability.
+- **Improved Disposal**: Enhanced resource cleanup during plugin disable to eliminate potential memory leaks from stale references.
+
 ## [1.2.1] - 2026-02-09
 
 ### Added
@@ -21,7 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Message Placeholder Bug**: Resolved an issue where `{world}` and `{type}` placeholders were not being replaced correctly in "feature-blocked" messages.
 - **Resource Optimization**: Ensured explicit cache clearing and resource disposal occur during plugin disable or reload to prevent potential memory leaks.
-
 
 ---
 
@@ -206,24 +223,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Quick Feature Matrix
 
-| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 |
-|------------------------|--------|--------|--------|--------|--------|--------|
-| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
-| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
-| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
-| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
+| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 |
+|------------------------|--------|--------|--------|--------|--------|--------|--------|
+| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
+| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
+| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
+| Thread-Safe Cache      | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
 
 ---
 
@@ -267,6 +285,7 @@ No breaking changes. Your existing configuration will continue to work. However,
 
 ---
 
+[1.2.2]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.1.0...v1.1.1

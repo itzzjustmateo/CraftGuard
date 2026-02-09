@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">CraftGuard</h1>
-  <img src="https://img.shields.io/badge/CraftGuard-v1.2.1-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
+  <img src="https://img.shields.io/badge/CraftGuard-v1.2.2-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
   <a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge" alt="Paper" /></a>
   <a href="https://www.oracle.com/java/"><img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge" alt="Java" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>
@@ -12,7 +12,7 @@
 
 **Tired of players crafting where you don't want them to? CraftGuard lets you control crafting, workstations, and portals, world by world.**
 
-[Features](#-features) • [Installation](#-installation) • [Commands](#-commands) • [Configuration](#-configuration) • [For Developers](#-for-developers)
+[Features](#features) • [Installation](#installation) • [Commands](#commands) • [Configuration](#configuration) • [For Developers](#for-developers)
 
 ---
 
@@ -37,7 +37,7 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 ### Core
 - **Granular Toggles**: Control crafting, nether portals, end portals, anvils, furnaces, and 10+ other workstation types.
 - **Per-World States**: Different settings for every world on your server.
-- **Bypass Permissions**: allow specific players to ignore restrictions by feature type.
+- **Bypass Permissions**: Allow specific players to ignore restrictions by feature type.
 - **Redesigned Help**: Clean, easy-to-read help menu with precise information.
 - **Modern Syntax**: Simplified command structure for managing your server.
 
@@ -75,7 +75,7 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 | Command                  | What it does                 | Who can do it      |
 | :----------------------- | :--------------------------- | :----------------- |
 | `/cg` or `/cg help`      | Shows help menu              | Everyone           |
-| `/cg <world> <type> on`    | Enable a feature in a world  | `craftguard.admin` |
+| `/cg <world> <type> on`    | Allow a feature in a world   | `craftguard.admin` |
 | `/cg <world> <type> off`   | Block a feature in a world   | `craftguard.admin` |
 | `/cg <world> <type> toggle`| Flip feature on/off          | `craftguard.admin` |
 | `/cg reload`               | Reload configuration         | `craftguard.admin` |
@@ -93,7 +93,8 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 ```
 
 ### Permissions
-| Permission                 | What it does                  | Default |
+
+| Permission                 | Description                   | Default |
 | :------------------------- | :---------------------------- | :------ |
 | `craftguard.admin`         | Manage all settings           | OP      |
 | `craftguard.bypass.<type>` | Bypass specific restriction   | false   |

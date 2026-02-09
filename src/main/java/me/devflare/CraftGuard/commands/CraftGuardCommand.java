@@ -89,7 +89,7 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
         }
 
         // Validate type
-        if (!configManager.getRegisteredTypes().contains(type) && !type.equals("crafting")) {
+        if (!configManager.getRegisteredTypes().contains(type)) {
             Component message = MessageUtil.format(
                     configManager.getMessageWithPrefix("invalid-type"));
             sender.sendMessage(message);
@@ -168,10 +168,16 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             List<String> suggestions = new ArrayList<>(Arrays.asList("help", "reload"));
             suggestions.addAll(Bukkit.getWorlds().stream().map(World::getName).collect(Collectors.toList()));
             return filterSuggestions(suggestions, args[0]);
-        } else if (args.length == 2) {
+        }
+
+        // Don't suggest feature types if first arg is a subcommand
+        String firstArg = args[0].toLowerCase();
+        if (firstArg.equals("help") || firstArg.equals("reload") || firstArg.equals("?")) {
+            return new ArrayList<>();
+        }
+
+        if (args.length == 2) {
             List<String> suggestions = new ArrayList<>(configManager.getRegisteredTypes());
-            if (!suggestions.contains("crafting"))
-                suggestions.add("crafting");
             return filterSuggestions(suggestions, args[1]);
         } else if (args.length == 3) {
             return filterSuggestions(Arrays.asList("on", "off", "toggle"), args[2]);

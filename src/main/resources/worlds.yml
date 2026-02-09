@@ -5,11 +5,17 @@
 #
 # Types: crafting, nether-portal, end-portal, anvil, furnace, etc.
 
+# Example world configuration
 world:
   crafting: true
   nether-portal: true
-  anvil: false
+  end-portal: true
+  # Note: Setting this to false will block anvil usage for all players in this world
+  anvil: true
+  furnace: true
 
+# Example nether world configuration
 world_nether:
+  crafting: true
   nether-portal: true
   furnace: true
