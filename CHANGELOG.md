@@ -1,227 +1,160 @@
 # Changelog
 
-All notable changes to CraftGuard will be documented in this file.
+All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+This project uses [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+and adheres to [Semantic Versioning](https://semver.org/).
+
+---
 
 ## [1.2.2] - 2026-02-09
 
 ### Added
-
-- **Smarter Placeholder Parsing**: Improved world name detection in PAPI placeholders to correctly handle world names containing underscores (e.g., `world_nether`, `my_custom_world`).
-- **Standardized Defaults**: Updated `worlds.yml` template to ensure features like `anvil` default to `true`, preventing accidental global blocks after installation.
+- Improved world name detection in PlaceholderAPI placeholders to handle underscores in world names (e.g., `world_nether`, `my_custom_world`).
+- Updated `worlds.yml` template so features like `anvil` now default to `true` to prevent accidental global blocks after installing.
 
 ### Changed
-
-- **Thread-Safe Architecture**: Refactored `ConfigManager` to use `ConcurrentHashMap` for all internal world states, ensuring reliable performance in multi-threaded environments.
-- **Tab-Completion Logic**: Refined tab completion to prevent irrelevant feature suggestions when using subcommands like `help` or `reload`.
-- **Feature Consistency**: Standardized `crafting-table` and `crafting` under a unified `crafting` feature key across filters, listeners, and config.
+- Refactored `ConfigManager` to use `ConcurrentHashMap` for all internal world state storage (thread-safe).
+- Tab completion now avoids suggesting irrelevant features for subcommands like `help` or `reload`.
+- Standardized feature naming: `crafting-table` and `crafting` are now unified as `crafting` in all filters, listeners, and configuration.
 
 ### Fixed
+- Removed unused fields and cleaned up special-case checks for better command maintainability.
+- Resource cleanup on plugin disable now fully removes stale references to prevent potential memory leaks.
 
-- **Dead Code Cleanup**: Removed unused fields and redundant special-case checks in command validation to improve maintainability.
-- **Improved Disposal**: Enhanced resource cleanup during plugin disable to eliminate potential memory leaks from stale references.
+---
 
 ## [1.2.1] - 2026-02-09
 
 ### Added
-
-- **Enhanced Placeholder Support**: Now supports both `{placeholder}` and `<placeholder>` formats in custom messages for greater flexibility.
-- **Maintenance**: Removed unused `skills` folder from the repository for cleaner organization.
+- Custom messages support both `{placeholder}` and `<placeholder>` formats.
+- Removed unused `skills` folder for better repository organization.
 
 ### Changed
-
-- **Help Command Accessibility**: `/cg` and `/cg help` can now be used by all players, regardless of their permissions.
-- **Unified Feature Naming**: Consolidated `crafting-table` and `crafting` under the single `crafting` feature key for consistency.
+- `/cg` and `/cg help` commands are now available to all players, regardless of permissions.
+- Unified filter and config naming: always use `crafting` as the key for filtering and toggling.
 
 ### Fixed
-
-- **Message Placeholder Bug**: Resolved an issue where `{world}` and `{type}` placeholders were not being replaced correctly in "feature-blocked" messages.
-- **Resource Optimization**: Ensured explicit cache clearing and resource disposal occur during plugin disable or reload to prevent potential memory leaks.
+- Fixed bug where `{world}` and `{type}` in feature-blocked messages were not replaced.
+- Ensured caches and resources are fully cleared on plugin disable/reload to prevent leaks.
 
 ---
 
 ## [1.2.0] - 2026-02-09
 
 ### Added
-
-- **Granular Feature Control**: Every workstation and portal now has its own toggle.
-  - Supported types: `crafting`, `nether-portal`, `end-portal`, `anvil`, `furnace`, `blast-furnace`, `smoker`, `enchanting`, `brewing`, `smithing`, `loom`, `cartography`, `grindstone`, `stonecutter`.
-- **New Command Syntax**: Updated `/cg <world> <type> <on|off|toggle>` for better clarity and control.
-- **Split Portal Control**: Nether and End portals can now be toggled independently.
-- **New Listeners**: Implemented `PortalListener` and `WorkstationListener` for broad feature blocking.
-- **Granular Bypass Permissions**: Fixed permissions to `craftguard.bypass.<type>` or `craftguard.bypass.*`.
-- **Granular Placeholders**: Added new PAPI placeholders for all feature types.
+- Each workstation and portal now has its own toggle (`crafting`, `nether-portal`, `end-portal`, `anvil`, `furnace`, `blast-furnace`, `smoker`, `enchanting`, `brewing`, `smithing`, `loom`, `cartography`, `grindstone`, `stonecutter`).
+- `/cg <world> <type> <on|off|toggle>` for precise feature control.
+- Nether and End portal toggles are now split.
+- `PortalListener` and `WorkstationListener` block features as required.
+- Added permission `craftguard.bypass.<type>` (as well as `craftguard.bypass.*`) for granular bypass.
+- Added PAPI placeholders for every feature type.
 
 ### Changed
-
-- **Hardcoded Permissions**: Permissions are now hardcoded and removed from `config.yml` for consistency.
-- **Redesigned Help Menu**: cleaner layout and better readability.
-- **World State Migration**: automatically migrates existing `worlds.yml` to the new granular format.
+- Permissions are now hardcoded, no longer defined in config.yml.
+- Help menu redesigned for clarity and improved readability.
+- Existing `worlds.yml` is migrated automatically to support granular toggles.
 
 ### Fixed
-
-- Improved command validation and error messaging.
+- Improved validation and error messaging in commands.
 
 ---
 
 ## [1.1.1] - 2026-02-07
 
 ### Fixed
-
-- **Crafting Bypass Bug**: Changed default `craftguard.bypass` permission from `op` to `false`.
-  - Fixes issue where server operators could not test crafting restrictions.
-  - Operators now need to explicitly grant themselves the bypass permission.
+- Changed default for `craftguard.bypass` permission from `op` to `false`, so server operators must grant themselves bypass intentionally.
 
 ---
 
 ## [1.1.0] - 2026-02-07
 
 ### Added
-
-- **Reload Command**: Added `/cg reload` to reload configuration without restarting the server.
-  - Requires `craftguard.admin` permission.
-  - Reloads `config.yml` and `worlds.yml` instantly.
+- `/cg reload` command to reload configuration files instantly (requires `craftguard.admin` permission).
 
 ---
 
 ## [1.0.2] - 2026-02-01
 
 ### Fixed
-
-- **Critical Lifecycle Issues**: Fixed memory leaks and stale references during plugin reloads
-  - Static instance now properly nullified on disable
-  - Explicit event listener unregistration to prevent duplicate events
-  - Added null-safe checks in `onDisable` to prevent crashes
-- **State Persistence Improvements**:
-  - Changed `worldStatesCache` to `ConcurrentHashMap` for thread safety
-  - Fixed PlaceholderAPI stale references by changing `persist()` to `false`
-  - Re-checks PAPI availability on every reload/enable
-- **Code Quality**:
-  - Removed unused imports and fields
-  - Updated versioning for consistency
+- Fixed memory leaks and dangling references on reload/disable.
+  - Static instance is now nullified on disable.
+  - Event listeners unregistered explicitly.
+  - Added null checks in `onDisable`.
+- Switched `worldStatesCache` to `ConcurrentHashMap` for thread safety.
+- Prevented PAPI stale references by setting `persist()` to `false` and rechecking availability on reloads.
+- Removed unused imports and fields; versioning consistency improved.
 
 ---
 
 ## [1.0.1] - 2026-02-01
 
 ### Added
-
-- **Help Command System**: Added `/cg` and `/cg help` commands that display plugin information
-  - Shows plugin version dynamically
-  - Lists all available commands
-  - Displays configured permission nodes
-  - Fully customizable help messages in config.yml as a list format
-  - Includes "help" in tab completion suggestions
+- `/cg` and `/cg help` commands showing version, commands, permission nodes, and customizable messages (now a list in config).
+- Help command now appears in tab completion suggestions.
 
 ### Changed
-
-- **Help Messages Format**: Restructured help section in config.yml from individual keys to a cleaner list format
-  - Before: `help-header`, `help-description`, etc.
-  - After: Single `help:` list with all lines
-  - Easier to customize and maintain
-  - Supports empty lines with `""`
-- **Message Prefix Configuration**: Changed error message reference from `paper-plugin.yml` to `plugin.yml`
-- Updated version from `1.0.0-SNAPSHOT` to `1.0.1-SNAPSHOT`
+- Help messages format switched to a list under `help:` in config. (Supports empty lines as `""`).
+- Message prefix now referenced from `plugin.yml`. Updated version: `1.0.1-SNAPSHOT`.
 
 ### Fixed
-
-- Improved consistency in configuration file documentation
+- Improved documentation consistency in configuration files.
 
 ---
 
 ## [1.0.0] - 2026-02-01
 
-### Added - Initial Release
-
+### Added
 #### Core Features
+- Per-World crafting control:
+  - `/cg <world> on` - Enable
+  - `/cg <world> off` - Disable
+  - `/cg <world> toggle` - Toggle
+- Bypass permissions for players.
+- Configurable default crafting state for new worlds.
 
-- **Per-World Crafting Control**: Enable, disable, or toggle crafting in any world
-  - `/cg <world> on` - Enable crafting in a world
-  - `/cg <world> off` - Disable crafting in a world
-  - `/cg <world> toggle` - Toggle crafting state
-- **Bypass Permissions**: Allow specific players to craft regardless of world settings
-- **Default Crafting State**: Configurable default state for new worlds
-
-#### Configuration System
-
-- **100% Configurable Messages**: All user-facing messages customizable in config.yml
-  - Support for legacy color codes (`&a`, `&c`, etc.)
-  - Support for MiniMessage formatting (`<green>`, `<red>`, etc.)
-  - Placeholder support: `{world}`, `{state}`, `{player}`, `{version}`
-- **Message Prefix System**: Global prefix for all player-facing messages
-  - Can be enabled/disabled via `prefix.enabled`
-  - Customizable prefix text
-  - Automatically excluded from console and status messages
-- **Custom Permissions**: Define your own permission nodes
-  - Configurable admin permission (default: `craftguard.admin`)
-  - Configurable bypass permission (default: `craftguard.bypass`)
-- **Command Aliases**: Customizable action words
-  - Enable aliases: `on`, `enable`, `true` (configurable)
-  - Disable aliases: `off`, `disable`, `false` (configurable)
-  - Toggle aliases: `toggle` (configurable)
-- **Event Configuration**:
-  - Configurable event priority (LOWEST to MONITOR)
-  - Option to ignore already-cancelled events
-- **Advanced Settings**:
-  - Debug mode for detailed logging
-  - World state caching for performance
-  - Configurable auto-save interval
+#### Configuration
+- All plugin messages are configurable in `config.yml`.
+  - Supports color codes and MiniMessage formatting.
+  - Placeholders: `{world}`, `{state}`, `{player}`, `{version}`
+- Toggle global message prefix.
+- Customizable permissions for admin/bypass.
+- Command action word aliases are configurable.
+- Configurable event priority and option to ignore cancelled events.
+- Debug logging and world state caching.
+- Configurable auto-save interval.
 
 #### Commands & Permissions
+- `/craftguard`, `/cguard`, `/cg` commands.
+- Tab completion for worlds and actions.
+- Permissions:
+  - `craftguard.admin` (default: OP)
+  - `craftguard.bypass` (default: OP)
 
-- **Main Command**: `/craftguard` with aliases `/cguard` and `/cg`
-- **Tab Completion**: Smart suggestions for worlds and actions
-  - Configurable action suggestions
-  - Option to include/exclude world names
-  - Case-insensitive matching
-- **Permissions**:
-  - `craftguard.admin` - Manage crafting settings (default: OP)
-  - `craftguard.bypass` - Bypass crafting restrictions (default: OP)
+#### PlaceholderAPI
+- Placeholders:
+  - `%craftguard_world%`
+  - `%craftguard_world_state%`
+  - `%craftguard_world_<worldname>%`
+- Works even if PlaceholderAPI is not installed.
 
-#### PlaceholderAPI Integration
+#### Technical
+- In-memory smart caching for world states.
+- Two config files: `config.yml` & `worlds.yml`.
+- Paper API 1.21.11 and Java 21 support.
+- Build with Maven. Code is fully Javadoc commented.
 
-- **Custom Placeholders** (requires PlaceholderAPI):
-  - `%craftguard_world%` - Current world name
-  - `%craftguard_world_state%` - Current world crafting state
-  - `%craftguard_world_<worldname>%` - Specific world state
-- **Soft Dependency**: Plugin works without PlaceholderAPI installed
-
-#### Technical Features
-
-- **Smart Caching**: World states cached in memory for performance
-- **Two Configuration Files**:
-  - `config.yml` - Messages, settings, permissions, advanced options
-  - `worlds.yml` - Per-world crafting states (auto-generated)
-- **Paper API 1.21.11** support
-- **Java 21** compatibility
-- **Maven Build System** with clean project structure
-- **Well-Documented Code**: JavaDoc comments for all public methods
-
-#### Console Messages
-
-- Configurable startup/shutdown messages
-- Configuration load confirmation
-- Command registration status
-- Event listener registration status
-- PlaceholderAPI integration status
-
-#### User Experience
-
-- **Notification System**: Players receive messages when trying to craft in disabled worlds
-  - Configurable via `notify-on-craft-attempt`
-- **Debug Logging**: Optional detailed logging for troubleshooting
-  - Command executions with world and action
-  - Blocked crafting attempts
-  - Permission bypass events
-- **Error Handling**: Clear error messages for invalid commands and missing worlds
+#### Console/User
+- Startup, shutdown, and configuration state messages.
+- Commands and events registration confirmations.
+- Notification when integration with PlaceholderAPI is detected.
+- Players are notified when crafting is blocked (configurable).
+- Debug logs, blocked crafting attempts, and bypass events.
+- Clear errors for invalid commands/worlds.
 
 ---
 
 ## Version Comparison
-
-### Quick Feature Matrix
 
 | Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 |
 |------------------------|--------|--------|--------|--------|--------|--------|--------|
@@ -247,41 +180,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Migration Guides
 
-### Upgrading from 1.0.0 to 1.0.1
+### Upgrade: 1.0.0 → 1.0.1
 
-No breaking changes. Your existing configuration will continue to work. However, you may want to:
+No breaking changes. All configuration continues to work. Optionally, update help messages to the new list format:
 
-1. **Update help messages** (optional): The new list format is cleaner:
+```yaml
+messages:
+  help:
+    - "&7&m---- &r &aCraftGuard v{version} &7&m----"
+    - "&7Your custom help text here"
+    # ... more lines
+```
 
-   ```yaml
-   # Old format still works, but new format is recommended:
-   messages:
-     help:
-       - "&7&m---- &r &aCraftGuard v{version} &7&m----"
-       - "&7Your custom help text here"
-       # ... more lines
-   ```
-
-2. No action required for functionality - the plugin will work exactly as before.
+No further action required.
 
 ---
 
 ## Notes
 
-- **Semantic Versioning**: We follow [SemVer](https://semver.org/) - MAJOR.MINOR.PATCH
-  - MAJOR: Breaking changes
-  - MINOR: New features (backward compatible)
-  - PATCH: Bug fixes (backward compatible)
+- **Semantic Versioning**: [MAJOR.MINOR.PATCH](https://semver.org)
+  - MAJOR: breaking changes
+  - MINOR: new, backward compatible features
+  - PATCH: backward compatible bug fixes
 
-- **Snapshot Builds**: Versions ending in `-SNAPSHOT` are development builds and may be unstable.
+- **Snapshot Builds**: Versions ending in `-SNAPSHOT` are development builds and may not be stable.
 
 ---
 
 ## Links
 
-- **GitHub Repository**: [CraftGuard on GitHub](https://github.com/itzzmateo/CraftGuard)
-- **Issues**: [Report a Bug](https://github.com/itzzmateo/CraftGuard/issues)
-- **Discussions**: [Feature Requests & Questions](https://github.com/itzzmateo/CraftGuard/discussions)
+- [GitHub Repository](https://github.com/itzzmateo/CraftGuard)
+- [Report a Bug](https://github.com/itzzmateo/CraftGuard/issues)
+- [Feature Requests & Questions](https://github.com/itzzmateo/CraftGuard/discussions)
 
 ---
 
