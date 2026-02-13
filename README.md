@@ -104,6 +104,8 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 
 ## 🔌 PlaceholderAPI Support
 
+Supports both %placeholder% and <placeholder> formats
+
 Placeholders follow a simple pattern:
 `%craftguard_world_state_<type>%` (for player's current world)
 `%craftguard_world_<worldname>_<type>%` (for specific world)
