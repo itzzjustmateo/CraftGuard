@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 This project uses [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.4.0] - 2026-02-13
+
+### Added
+
+- **Interactive GUI system**: New chest-based interface for managing features.
+  - Accessible via `/cg` (without arguments).
+  - Categorized into **Workstations** (Crafting, Anvil, Furnace, etc.) and **Portals** (Nether, End).
+  - Visual indicators: Green Wool for enabled, Red Wool for disabled.
+  - Automatic pagination and centered item layouts.
+- Added a "Back to Main Menu" navigation option in all sub-GUIs.
+
+### Changed
+
+- Command `/cg` now opens the GUI for players; `/cg help` remains chat-based.
+- Upgraded project version to 1.4.0.
+- Refactored `CraftGuardCommand` to integrate with the new `GUIManager`.
+
+---
+
 ## [1.3.0] - 2026-02-10
 
 ### Added
@@ -170,25 +189,26 @@ and adheres to [Semantic Versioning](https://semver.org/).
 
 ## Version Comparison
 
-| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 |
-|------------------------|--------|--------|--------|--------|--------|--------|--------|
-| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
-| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
-| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
-| Thread-Safe Cache      | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
+| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 | v1.4.0 |
+| ---------------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Per-World Control      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Configurable Messages  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Message Prefix System  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| PlaceholderAPI Support | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Debug Mode             | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Tab Completion         | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Help Command           | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| List-Based Help Config | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| State Persistence Fix  | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Memory Leak Fixes      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Java 21 Support        | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Paper 1.21.11 Support  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Reload Command         | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| OP Bypass Fix          | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      |
+| Granular Toggles       | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      |
+| Public Help Command    | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      |
+| Thread-Safe Cache      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      |
+| Interactive GUI        | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      |
 
 ---
 
@@ -229,6 +249,8 @@ No further action required.
 
 ---
 
+[1.4.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.2...v1.3.0
 [1.2.2]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.1.1...v1.2.0
