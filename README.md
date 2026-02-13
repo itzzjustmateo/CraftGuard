@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">CraftGuard</h1>
-  <img src="https://img.shields.io/badge/CraftGuard-v1.2.2-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
+  <img src="https://img.shields.io/badge/CraftGuard-v1.3.0-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
   <a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge" alt="Paper" /></a>
   <a href="https://www.oracle.com/java/"><img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge" alt="Java" /></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>

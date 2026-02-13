@@ -225,7 +225,60 @@ public class ConfigManager {
      */
     public Set<String> getRegisteredTypes() {
         ConfigurationSection section = config.getConfigurationSection("messages.type-names");
-        return section != null ? section.getKeys(false) : Set.of("crafting");
+        return section != null ? section.getKeys(false) : Set.of("crafting", "containers");
+    }
+
+    // ==================== Module Settings ====================
+
+    /**
+     * Check if the containers module is enabled
+     */
+    public boolean isContainersModuleEnabled() {
+        return config.getBoolean("modules.containers.enabled", true);
+    }
+
+    /**
+     * Get the list of blocked container types
+     */
+    public List<String> getBlockedContainerTypes() {
+        return config.getStringList("modules.containers.blocked-types");
+    }
+
+    /**
+     * Check if WorldGuard integration is enabled
+     */
+    public boolean isWorldGuardEnabled() {
+        return config.getBoolean("modules.worldguard.use-integration", true);
+    }
+
+    /**
+     * Check if interactions should be allowed by default in regions
+     */
+    public boolean shouldDefaultAllowInRegions() {
+        return config.getBoolean("modules.worldguard.default-allow-in-regions", false);
+    }
+
+    // ==================== Logging Settings ====================
+
+    /**
+     * Check if audit logging is enabled
+     */
+    public boolean isLoggingEnabled() {
+        return config.getBoolean("logging.enabled", true);
+    }
+
+    /**
+     * Get the audit log file name
+     */
+    public String getLogFileName() {
+        return config.getString("logging.file-name", "audit_log.txt");
+    }
+
+    /**
+     * Check if logging should be asynchronous
+     */
+    public boolean isLoggingAsync() {
+        return config.getBoolean("logging.async", true);
     }
 
     /**

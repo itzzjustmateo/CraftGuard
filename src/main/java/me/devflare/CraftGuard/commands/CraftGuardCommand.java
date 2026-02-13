@@ -28,10 +28,12 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
 
     private final CraftGuard plugin;
     private final ConfigManager configManager;
+    private final me.devflare.CraftGuard.utils.GUIManager guiManager;
 
-    public CraftGuardCommand(CraftGuard plugin) {
+    public CraftGuardCommand(CraftGuard plugin, me.devflare.CraftGuard.utils.GUIManager guiManager) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
+        this.guiManager = guiManager;
     }
 
     @Override
@@ -39,7 +41,11 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
             @NotNull String label, @NotNull String[] args) {
 
         if (args.length == 0) {
-            sendHelpMessage(sender);
+            if (sender instanceof Player player) {
+                guiManager.openMainMenu(player);
+            } else {
+                sender.sendMessage(MessageUtil.format(configManager.getMessage("console-must-specify-world")));
+            }
             return true;
         }
 

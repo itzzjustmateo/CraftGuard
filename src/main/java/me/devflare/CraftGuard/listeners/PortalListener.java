@@ -2,6 +2,7 @@ package me.devflare.CraftGuard.listeners;
 
 import me.devflare.CraftGuard.CraftGuard;
 import me.devflare.CraftGuard.config.ConfigManager;
+import me.devflare.CraftGuard.utils.LogEntry;
 import me.devflare.CraftGuard.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
+import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -19,9 +21,11 @@ import java.util.Map;
  */
 public class PortalListener implements Listener {
 
+    private final CraftGuard plugin;
     private final ConfigManager configManager;
 
     public PortalListener(CraftGuard plugin) {
+        this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
     }
 
@@ -51,11 +55,26 @@ public class PortalListener implements Listener {
             return;
         }
 
+        // Check WorldGuard bypass
+        if (plugin.getConfigManager().isWorldGuardEnabled()
+                && plugin.getWorldGuardHook().isBypassed(player, player.getLocation())) {
+            return;
+        }
+
         // Check if enabled
         String worldName = player.getWorld().getName();
         if (!configManager.isFeatureEnabled(worldName, type)) {
             event.setCancelled(true);
             configManager.debug("Blocked portal (" + type + ") for " + player.getName() + " in world: " + worldName);
+
+            // Audit log
+            plugin.getAuditLogger().log(new LogEntry(
+                    LocalDateTime.now(),
+                    worldName,
+                    player.getName(),
+                    "USE_PORTAL",
+                    type.equals("nether-portal") ? org.bukkit.Material.NETHER_PORTAL : org.bukkit.Material.END_PORTAL,
+                    player.getLocation()));
 
             if (configManager.shouldNotifyOnBlock()) {
                 String typeName = configManager.getTypeName(type);

@@ -27,7 +27,6 @@ messages:
   # Message shown when a player tries to use a blocked feature
   feature-blocked: "<red>{type}</red> is <bold>disabled</bold> in <yellow>{world}</yellow>. <gray>You cannot use it here.</gray>"
 
-
   # Help command output
   help:
     - "<dark_gray>------------------[ <green>CraftGuard Help</green> ]------------------</dark_gray>"
@@ -44,7 +43,6 @@ messages:
   # Status fragments (used for dynamic state messages, supports color and emphasis)
   status-enabled: "<green><bold>ENABLED</bold></green>"
   status-disabled: "<red><bold>DISABLED</bold></red>"
-
 
   # Feature type names (how they appear in messages)
   type-names:
@@ -83,6 +81,44 @@ settings:
 
   event-priority: HIGHEST
   ignore-cancelled-events: true
+
+# Extended modules
+modules:
+  containers:
+    enabled: true
+    blocked-types:
+      - CHEST
+      - TRAPPED_CHEST
+      - ENDER_CHEST
+      - BARREL
+      - SHULKER_BOX
+      - WHITE_SHULKER_BOX
+      - ORANGE_SHULKER_BOX
+      - MAGENTA_SHULKER_BOX
+      - LIGHT_BLUE_SHULKER_BOX
+      - YELLOW_SHULKER_BOX
+      - LIME_SHULKER_BOX
+      - PINK_SHULKER_BOX
+      - GRAY_SHULKER_BOX
+      - LIGHT_GRAY_SHULKER_BOX
+      - CYAN_SHULKER_BOX
+      - PURPLE_SHULKER_BOX
+      - BLUE_SHULKER_BOX
+      - BROWN_SHULKER_BOX
+      - GREEN_SHULKER_BOX
+      - RED_SHULKER_BOX
+      - BLACK_SHULKER_BOX
+
+  worldguard:
+    use-integration: true
+    # If true, restrictions are ignored in regions with 'cg-interaction-bypass' flag
+    default-allow-in-regions: false
+
+# Auditing and logging
+logging:
+  enabled: true
+  file-name: "audit_log.txt"
+  async: true # Essential for performance
 
 # Advanced technical settings
 advanced:

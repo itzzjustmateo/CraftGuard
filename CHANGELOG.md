@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 This project uses [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.3.0] - 2026-02-10
+
+### Added
+
+- **Container Control**: New module to restrict access to chests, shulker boxes, and other containers.
+- **WorldGuard Integration**: Support for region-based bypasses using the custom flag `cg-interaction-bypass`.
+- **Async Audit Logging**: High-performance logging system to track blocked interactions in `audit_log.txt`.
+- Added `craftguard.bypass.containers` permission.
+
+### Changed
+
+- Upgraded project version to 1.3.0.
+- Refactored internal listener logic for better extensibility.
+
 ---
 
 ## [1.2.2] - 2026-02-09
