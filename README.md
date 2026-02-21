@@ -3,7 +3,7 @@
 ![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.5.0-brightgreen?style=for-the-badge)
 [![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://github.com/itzzjustmateo/CraftGuard/blob/main/LICENSE)
 
 > **⚠️ About FlameAntiCraft/FlameCraft**  
 > CraftGuard picks up where my old anti-crafting plugin, [FlameAntiCraft (FlameCraft)](https://modrinth.com/plugin/flameanticraft), left off.  
@@ -150,12 +150,12 @@ You can access the `ConfigManager` via `CraftGuard.getInstance().getConfigManage
 
 ## 📝 License
 
-MIT License — see [LICENSE](LICENSE).
+MIT License — see [LICENSE](https://github.com/itzzjustmateo/CraftGuard/blob/main/LICENSE).
 
 ---
 
 ## 🤝 Support
 
-- **Issues?** [GitHub Issues](../../issues)
-- **Discussions:** [Feature Requests](../../discussions)
+- **Issues?** [GitHub Issues](https://github.com/itzzjustmateo/CraftGuard/issues)
+- **Discussions:** [Feature Requests](https://github.com/itzzjustmateo/CraftGuard/discussions)
 - **Discord:** [Join our Discord](https://dc.devflare.de)
