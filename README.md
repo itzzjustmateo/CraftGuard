@@ -31,6 +31,11 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 
 ---
 
+Optional Dependencies: WorldGuard, PlaceholderAPI
+Recommended to use: Multiverse-Core
+
+--
+
 ## ✨ Features
 
 ### Core

@@ -42,6 +42,7 @@ public class CraftingListener implements Listener {
 
         // Check WorldGuard bypass
         if (plugin.getConfigManager().isWorldGuardEnabled()
+                && plugin.getWorldGuardHook() != null
                 && plugin.getWorldGuardHook().isBypassed(player, player.getLocation())) {
             return;
         }

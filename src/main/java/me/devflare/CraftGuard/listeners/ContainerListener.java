@@ -56,6 +56,7 @@ public class ContainerListener implements Listener {
 
         // 2. Check WorldGuard integration
         if (plugin.getConfigManager().isWorldGuardEnabled()
+                && plugin.getWorldGuardHook() != null
                 && plugin.getWorldGuardHook().isBypassed(player, block.getLocation())) {
             return;
         }
