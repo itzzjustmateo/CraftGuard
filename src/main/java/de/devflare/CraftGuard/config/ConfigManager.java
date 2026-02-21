@@ -259,6 +259,22 @@ public class ConfigManager {
         return config.getBoolean("modules.worldguard.default-allow-in-regions", false);
     }
 
+    // ==================== Update Settings ====================
+
+    /**
+     * Check if update checking is enabled
+     */
+    public boolean isUpdateCheckEnabled() {
+        return config.getBoolean("updates.check-for-updates", true);
+    }
+
+    /**
+     * Check if auto-download is enabled
+     */
+    public boolean isAutoDownloadEnabled() {
+        return config.getBoolean("updates.auto-download", true);
+    }
+
     // ==================== Logging Settings ====================
 
     /**

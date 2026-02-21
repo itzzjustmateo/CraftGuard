@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 This project uses [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.0] - 2026-02-21
+
+### Added
+
+- **Modrinth Update Notifier**: Automatic version checking with admin join notifications.
+  - Configurable via `updates.check-for-updates` and `updates.auto-download` in `config.yml`.
+  - Auto-downloads new JAR to `plugins/update/` when 2+ minor versions behind.
+  - Clickable download link in chat for manual updates.
+- **Premium GUI redesign**: Two-row layout with workstation icons and status indicators (Lime/Red Concrete).
+  - MiniMessage small-caps styling for all GUI text.
+  - Slot-based click detection; clicking icon or indicator toggles the feature.
+  - Dark theme using `BLACK_STAINED_GLASS_PANE` background.
+- Added `config-version` field to `config.yml` for future migration support.
+- Added `/cg` (no args) entry and Features section to `/cg help`.
+
+### Fixed
+
+- Fixed `NullPointerException` in all listeners when WorldGuard is not installed.
+
+### Changed
+
+- Refactored package from `me.devflare` to `de.devflare`.
+- WorldGuard is now an optional soft dependency in `plugin.yml`.
+- Updated README with new features and corrected documentation.
+- Upgraded project version to 1.5.0.
+
+---
+
 ## [1.4.1] - 2026-02-21
 
 ### Added
@@ -222,27 +250,28 @@ and adheres to [Semantic Versioning](https://semver.org/).
 
 ## Version Comparison
 
-| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 | v1.4.0 | v1.4.1 |
-| ---------------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
-| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
-| Thread-Safe Cache      | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
-| Interactive GUI        | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
-| Premium GUI Redesign   | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
+| Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 | v1.4.0 | v1.4.1 | v1.5.0 |
+| ---------------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
+| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Thread-Safe Cache      | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
+| Interactive GUI        | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
+| Premium GUI Redesign   | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
+| Update Notifier        | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
 
 ---
 
@@ -283,6 +312,7 @@ No further action required.
 
 ---
 
+[1.5.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.4.1...v1.5.0
 [1.4.1]: https://github.com/itzzmateo/CraftGuard/compare/v1.4.0...v1.4.1
 [1.4.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/itzzmateo/CraftGuard/compare/v1.2.2...v1.3.0

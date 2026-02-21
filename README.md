@@ -1,6 +1,6 @@
 # CraftGuard
 
-![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.3.0-brightgreen?style=for-the-badge)
+![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.5.0-brightgreen?style=for-the-badge)
 [![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
@@ -34,18 +34,22 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 Optional Dependencies: WorldGuard, PlaceholderAPI
 Recommended to use: Multiverse-Core
 
---
+---
 
 ## ✨ Features
 
 ### Core
+
 - **Granular Toggles**: Control crafting, nether portals, end portals, anvils, furnaces, and 10+ other workstation types.
 - **Per-World States**: Different settings for every world on your server.
+- **Interactive GUI**: Premium chest-based interface with MiniMessage small-caps styling and status indicators.
+- **Update Notifier**: Automatic version checking via Modrinth with admin join notifications and auto-download.
 - **Bypass Permissions**: Allow specific players to ignore restrictions by feature type.
 - **Redesigned Help**: Clean, easy-to-read help menu with precise information.
 - **Modern Syntax**: Simplified command structure for managing your server.
 
 ### Supported Features
+
 - `crafting`
 - `nether-portal`
 - `end-portal`
@@ -59,12 +63,14 @@ Recommended to use: Multiverse-Core
 ## 📦 How to Install
 
 ### Requirements
-- **Paper** 1.21.11 or newer
+
+- **Paper** 1.21.x
 - **Java** 21+
 - (Optional) PlaceholderAPI for advanced placeholders
 
 ### Quick Start
-1. **Download** the latest `craftguard-1.2.0.jar` from [Releases](../../releases)
+
+1. **Download** the latest `craftguard-1.5.0.jar` from [Modrinth](https://modrinth.com/plugin/craftguard)
 2. **Put** it in your server's `plugins/` folder
 3. **Restart** your server
 4. **Edit** the config: `plugins/CraftGuard/config.yml`
@@ -78,13 +84,15 @@ Recommended to use: Multiverse-Core
 
 | Command                      | What it does               | Who can do it      |
 | :--------------------------- | :------------------------- | :----------------- |
-| `/cg` or `/cg help`          | Shows help menu            | Everyone           |
+| `/cg`                        | Opens the management GUI   | `craftguard.admin` |
+| `/cg help`                   | Shows help menu            | `craftguard.admin` |
 | `/cg <world> <type> on`      | Allow a feature in a world | `craftguard.admin` |
 | `/cg <world> <type> off`     | Block a feature in a world | `craftguard.admin` |
 | `/cg <world> <type> toggle`  | Flip feature on/off        | `craftguard.admin` |
 | `/cg reload`                 | Reload configuration       | `craftguard.admin` |
 
 ### Command Examples
+
 ```bash
 # Block anvils in "survival"
 /cg survival anvil off
@@ -115,6 +123,7 @@ Placeholders follow a simple pattern:
 `%craftguard_world_<worldname>_<type>%` (for specific world)
 
 **Examples:**
+
 - `%craftguard_world_state_crafting%` -> `enabled`
 - `%craftguard_world_survival_anvil%` -> `disabled`
 - `%craftguard_world_state_nether-portal%` -> `enabled`
@@ -132,6 +141,7 @@ mvn clean package
 ```
 
 ### ConfigManager API
+
 You can access the `ConfigManager` via `CraftGuard.getInstance().getConfigManager()`.
 - `isFeatureEnabled(String world, String type)`
 - `setFeatureEnabled(String world, String type, boolean enabled)`
@@ -139,6 +149,7 @@ You can access the `ConfigManager` via `CraftGuard.getInstance().getConfigManage
 ---
 
 ## 📝 License
+
 MIT License — see [LICENSE](LICENSE).
 
 ---

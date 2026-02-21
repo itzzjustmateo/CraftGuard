@@ -6,6 +6,9 @@
 # Placeholders: {world}, {state}, {type}, {player}
 # Types: crafting, nether-portal, end-portal, anvil, furnace, etc.
 
+# !! DO NOT TOUCH !!
+config-version: 2
+
 # Controls the prefix shown at the start of all player-facing messages
 prefix:
   enabled: true
@@ -31,6 +34,7 @@ messages:
   help:
     - "<dark_gray>------------------[ <green>CraftGuard Help</green> ]------------------</dark_gray>"
     - "<yellow>Commands:</yellow>"
+    - " <aqua>/cg</aqua> <gray>» Open the management GUI</gray>"
     - " <aqua>/cg <world> <type> <on|off|toggle></aqua>"
     - " <gray>» Manage features (e.g. anvil, nether-portal, crafting)</gray>"
     - " <aqua>/cg reload</aqua> <gray>» Reload configurations</gray>"
@@ -38,6 +42,9 @@ messages:
     - "<yellow>Permissions:</yellow>"
     - " <gray>Admin: <blue>craftguard.admin</blue></gray>"
     - " <gray>Bypass: <blue>craftguard.bypass.<type></blue> or <blue>craftguard.bypass.*</blue></gray>"
+    - "<yellow>Features:</yellow>"
+    - " <gray>» Interactive GUI with premium design</gray>"
+    - " <gray>» Automatic update notifications via Modrinth</gray>"
     - "<dark_gray>-----------------------------------------------------</dark_gray>"
 
   # Status fragments (used for dynamic state messages, supports color and emphasis)
@@ -119,6 +126,13 @@ logging:
   enabled: true
   file-name: "audit_log.txt"
   async: true # Essential for performance
+
+# Update notifications
+updates:
+  # Check Modrinth for new versions on startup and every 6 hours
+  check-for-updates: true
+  # Automatically download new JAR to plugins/update/ when 2+ minor versions behind
+  auto-download: true
 
 # Advanced technical settings
 advanced:

@@ -14,13 +14,14 @@ import de.devflare.CraftGuard.listeners.WorkstationListener;
 import de.devflare.CraftGuard.placeholders.CraftGuardExpansion;
 import de.devflare.CraftGuard.utils.AsyncAuditLogger;
 import de.devflare.CraftGuard.utils.MessageUtil;
+import de.devflare.CraftGuard.utils.UpdateChecker;
 import de.devflare.CraftGuard.utils.WorldGuardHook;
 
 /**
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.4.1
+ * @version 1.5.0
  */
 public final class CraftGuard extends JavaPlugin {
 
@@ -35,6 +36,7 @@ public final class CraftGuard extends JavaPlugin {
     private ContainerListener containerListener;
     private WorldGuardHook worldGuardHook;
     private AsyncAuditLogger auditLogger;
+    private UpdateChecker updateChecker;
 
     @Override
     public void onLoad() {
@@ -96,6 +98,10 @@ public final class CraftGuard extends JavaPlugin {
             getLogger().info(configManager.getMessage("placeholderapi-not-found"));
         }
 
+        // Start update checker
+        updateChecker = new UpdateChecker(this);
+        updateChecker.start();
+
         String enabledMsg = configManager.getMessage("plugin-enabled")
                 .replace("{version}", getPluginMeta().getVersion());
         getLogger().info(enabledMsg);
@@ -123,6 +129,10 @@ public final class CraftGuard extends JavaPlugin {
         if (guiListener != null) {
             HandlerList.unregisterAll(guiListener);
             guiListener = null;
+        }
+        if (updateChecker != null) {
+            HandlerList.unregisterAll(updateChecker);
+            updateChecker = null;
         }
 
         // Shutdown Logger
