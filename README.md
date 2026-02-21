@@ -1,10 +1,9 @@
-<p align="center">
-  <h1 align="center">CraftGuard</h1>
-  <img src="https://img.shields.io/badge/CraftGuard-v1.3.0-brightgreen?style=for-the-badge" alt="CraftGuard Logo" />
-  <a href="https://papermc.io/"><img src="https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge" alt="Paper" /></a>
-  <a href="https://www.oracle.com/java/"><img src="https://img.shields.io/badge/Java-21-orange?style=for-the-badge" alt="Java" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="License" /></a>
-</p>
+# CraftGuard
+
+![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.3.0-brightgreen?style=for-the-badge)
+[![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
+[![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
+[![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
 > **⚠️ About FlameAntiCraft/FlameCraft**  
 > CraftGuard picks up where my old anti-crafting plugin, [FlameAntiCraft (FlameCraft)](https://modrinth.com/plugin/flameanticraft), left off.  
@@ -12,7 +11,7 @@
 
 **Tired of players crafting where you don't want them to? CraftGuard lets you control crafting, workstations, and portals, world by world.**
 
-[Features](#features) • [Installation](#installation) • [Commands](#commands) • [Configuration](#configuration) • [For Developers](#for-developers)
+[Features](#-features) • [Installation](#-how-to-install) • [Commands](#-commands) • [Configuration](#-placeholderapi-support) • [For Developers](#-developers)
 
 ---
 
@@ -72,13 +71,13 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 
 **Base command:** `/craftguard` (or `/cguard`, `/cg`)
 
-| Command                  | What it does                 | Who can do it      |
-| :----------------------- | :--------------------------- | :----------------- |
-| `/cg` or `/cg help`      | Shows help menu              | Everyone           |
-| `/cg <world> <type> on`    | Allow a feature in a world   | `craftguard.admin` |
-| `/cg <world> <type> off`   | Block a feature in a world   | `craftguard.admin` |
-| `/cg <world> <type> toggle`| Flip feature on/off          | `craftguard.admin` |
-| `/cg reload`               | Reload configuration         | `craftguard.admin` |
+| Command                      | What it does               | Who can do it      |
+| :--------------------------- | :------------------------- | :----------------- |
+| `/cg` or `/cg help`          | Shows help menu            | Everyone           |
+| `/cg <world> <type> on`      | Allow a feature in a world | `craftguard.admin` |
+| `/cg <world> <type> off`     | Block a feature in a world | `craftguard.admin` |
+| `/cg <world> <type> toggle`  | Flip feature on/off        | `craftguard.admin` |
+| `/cg reload`                 | Reload configuration       | `craftguard.admin` |
 
 ### Command Examples
 ```bash
@@ -94,11 +93,11 @@ Whether you're running minigames, creative hubs, or want extra survival control,
 
 ### Permissions
 
-| Permission                 | Description                   | Default |
-| :------------------------- | :---------------------------- | :------ |
-| `craftguard.admin`         | Manage all settings           | OP      |
-| `craftguard.bypass.<type>` | Bypass specific restriction   | false   |
-| `craftguard.bypass.*`      | Bypass all restrictions       | false   |
+| Permission                 | Description                 | Default |
+| :------------------------- | :-------------------------- | :------ |
+| `craftguard.admin`         | Manage all settings         | OP      |
+| `craftguard.bypass.<type>` | Bypass specific restriction | false   |
+| `craftguard.bypass.*`      | Bypass all restrictions     | false   |
 
 ---
 
@@ -120,6 +119,7 @@ Placeholders follow a simple pattern:
 ## 👨‍💻 Developers
 
 ### Building from Source
+
 ```bash
 git clone https://github.com/itzzjustmateo/CraftGuard.git
 cd CraftGuard
@@ -139,6 +139,7 @@ MIT License — see [LICENSE](LICENSE).
 ---
 
 ## 🤝 Support
+
 - **Issues?** [GitHub Issues](../../issues)
 - **Discussions:** [Feature Requests](../../discussions)
 - **Discord:** [Join our Discord](https://dc.devflare.de)

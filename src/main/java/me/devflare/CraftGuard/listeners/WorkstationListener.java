@@ -13,12 +13,13 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.inventory.InventoryType;
+
 import org.bukkit.event.player.PlayerInteractEvent;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * Listener for workstation events
@@ -29,7 +30,11 @@ public class WorkstationListener implements Listener {
     private final CraftGuard plugin;
     private final ConfigManager configManager;
     private final Map<Material, String> materialToType = new HashMap<>();
-    private final Map<InventoryType, String> inventoryToType = new HashMap<>();
+    private final Map<String, String> inventoryToType = new HashMap<>();
+
+    // Cache to prevent duplicate notifications/logs in the same tick
+    private final Map<UUID, String> lastBlockedType = new HashMap<>();
+    private final Map<UUID, Integer> lastBlockedTick = new HashMap<>();
 
     public WorkstationListener(CraftGuard plugin) {
         this.plugin = plugin;
@@ -55,18 +60,19 @@ public class WorkstationListener implements Listener {
         materialToType.put(Material.STONECUTTER, "stonecutter");
 
         // InventoryType to type mapping for InventoryOpenEvent
-        inventoryToType.put(InventoryType.ANVIL, "anvil");
-        inventoryToType.put(InventoryType.FURNACE, "furnace");
-        inventoryToType.put(InventoryType.BLAST_FURNACE, "blast-furnace");
-        inventoryToType.put(InventoryType.SMOKER, "smoker");
-        inventoryToType.put(InventoryType.WORKBENCH, "crafting");
-        inventoryToType.put(InventoryType.ENCHANTING, "enchanting");
-        inventoryToType.put(InventoryType.BREWING, "brewing");
-        inventoryToType.put(InventoryType.SMITHING, "smithing");
-        inventoryToType.put(InventoryType.LOOM, "loom");
-        inventoryToType.put(InventoryType.CARTOGRAPHY, "cartography");
-        inventoryToType.put(InventoryType.GRINDSTONE, "grindstone");
-        inventoryToType.put(InventoryType.STONECUTTER, "stonecutter");
+        // InventoryType name to type mapping for InventoryOpenEvent
+        inventoryToType.put("ANVIL", "anvil");
+        inventoryToType.put("FURNACE", "furnace");
+        inventoryToType.put("BLAST_FURNACE", "blast-furnace");
+        inventoryToType.put("SMOKER", "smoker");
+        inventoryToType.put("WORKBENCH", "crafting");
+        inventoryToType.put("ENCHANTING", "enchanting");
+        inventoryToType.put("BREWING", "brewing");
+        inventoryToType.put("SMITHING", "smithing");
+        inventoryToType.put("LOOM", "loom");
+        inventoryToType.put("CARTOGRAPHY", "cartography");
+        inventoryToType.put("GRINDSTONE", "grindstone");
+        inventoryToType.put("STONECUTTER", "stonecutter");
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -88,7 +94,7 @@ public class WorkstationListener implements Listener {
         if (!(event.getPlayer() instanceof Player player))
             return;
 
-        String type = inventoryToType.get(event.getInventory().getType());
+        String type = inventoryToType.get(event.getInventory().getType().name());
         if (type != null) {
             checkAndBlock(player, event, type);
         }
@@ -111,6 +117,18 @@ public class WorkstationListener implements Listener {
         String worldName = player.getWorld().getName();
         if (!configManager.isFeatureEnabled(worldName, type)) {
             event.setCancelled(true);
+
+            // Prevent duplicate handling in the same tick for the same type
+            int currentTick = org.bukkit.Bukkit.getCurrentTick();
+            UUID uuid = player.getUniqueId();
+            if (lastBlockedTick.containsKey(uuid) && lastBlockedTick.get(uuid) == currentTick
+                    && type.equals(lastBlockedType.get(uuid))) {
+                return;
+            }
+
+            lastBlockedTick.put(uuid, currentTick);
+            lastBlockedType.put(uuid, type);
+
             configManager
                     .debug("Blocked workstation (" + type + ") for " + player.getName() + " in world: " + worldName);
 

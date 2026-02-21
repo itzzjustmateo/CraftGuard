@@ -11,7 +11,7 @@ website: https://itzzmateo.devflare.de
 commands:
   craftguard:
     description: Manage crafting permissions per world
-    usage: /<command> [world] [on|off|toggle]
+    usage: /<command> <world> <type> <on|off|toggle>
     aliases: [cguard, cg]
     permission: craftguard.admin
 
@@ -26,6 +26,10 @@ permissions:
 dependencies:
   server:
     PlaceholderAPI:
+      load: BEFORE
+      required: false
+      join-classpath: true
+    WorldGuard:
       load: BEFORE
       required: false
       join-classpath: true

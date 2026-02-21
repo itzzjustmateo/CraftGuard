@@ -13,9 +13,9 @@ prefix:
 
 messages:
   # Messages sent to players on command success
-  feature-enabled: "<green>{type}</green> has been <bold><a>enabled</a></bold> <gray>in world <e>{world}</e>.</gray>"
-  feature-disabled: "<red>{type}</red> has been <bold><c>disabled</c></bold> <gray>in world <e>{world}</e>.</gray>"
-  feature-toggled: "<yellow>{type}</yellow> in world <e>{world}</e> is now <bold>{state}</bold>."
+  feature-enabled: "<green>{type}</green> has been <bold><green>enabled</green></bold> <gray>in world <yellow>{world}</yellow>.</gray>"
+  feature-disabled: "<red>{type}</red> has been <bold><red>disabled</red></bold> <gray>in world <yellow>{world}</yellow>.</gray>"
+  feature-toggled: "<yellow>{type}</yellow> in world <yellow>{world}</yellow> is now <bold>{state}</bold>."
 
   # Error messages shown to players
   no-permission: "<red>You do not have permission to use this command.</red>"

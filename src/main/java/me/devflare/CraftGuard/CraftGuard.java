@@ -37,7 +37,9 @@ public final class CraftGuard extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        WorldGuardHook.registerFlag();
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            WorldGuardHook.registerFlag();
+        }
     }
 
     @Override
@@ -72,7 +74,9 @@ public final class CraftGuard extends JavaPlugin {
         }
 
         // Initialize Hooks & Utilities
-        worldGuardHook = new WorldGuardHook();
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+            worldGuardHook = new WorldGuardHook();
+        }
         auditLogger = new AsyncAuditLogger(this);
 
         // Register event listeners

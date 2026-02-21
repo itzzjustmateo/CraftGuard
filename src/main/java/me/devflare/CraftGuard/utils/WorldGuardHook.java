@@ -54,13 +54,17 @@ public class WorldGuardHook {
         if (!enabled || INTERACTION_BYPASS_FLAG == null)
             return false;
 
-        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
-        Location wgLoc = BukkitAdapter.adapt(loc);
-        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-        RegionQuery query = container.createQuery();
-        ApplicableRegionSet set = query.getApplicableRegions(wgLoc);
+        try {
+            LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+            Location wgLoc = BukkitAdapter.adapt(loc);
+            RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+            RegionQuery query = container.createQuery();
+            ApplicableRegionSet set = query.getApplicableRegions(wgLoc);
 
-        return set.testState(localPlayer, INTERACTION_BYPASS_FLAG);
+            return set.testState(localPlayer, INTERACTION_BYPASS_FLAG);
+        } catch (NoClassDefFoundError | Exception e) {
+            return false;
+        }
     }
 
     public boolean isEnabled() {

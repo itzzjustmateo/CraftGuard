@@ -84,11 +84,13 @@ and adheres to [Semantic Versioning](https://semver.org/).
 - Added PAPI placeholders for every feature type.
 
 ### Changed
+
 - Permissions are now hardcoded, no longer defined in config.yml.
 - Help menu redesigned for clarity and improved readability.
 - Existing `worlds.yml` is migrated automatically to support granular toggles.
 
 ### Fixed
+
 - Improved validation and error messaging in commands.
 
 ---
@@ -96,6 +98,7 @@ and adheres to [Semantic Versioning](https://semver.org/).
 ## [1.1.1] - 2026-02-07
 
 ### Fixed
+
 - Changed default for `craftguard.bypass` permission from `op` to `false`, so server operators must grant themselves bypass intentionally.
 
 ---
@@ -103,6 +106,7 @@ and adheres to [Semantic Versioning](https://semver.org/).
 ## [1.1.0] - 2026-02-07
 
 ### Added
+
 - `/cg reload` command to reload configuration files instantly (requires `craftguard.admin` permission).
 
 ---
@@ -110,6 +114,7 @@ and adheres to [Semantic Versioning](https://semver.org/).
 ## [1.0.2] - 2026-02-01
 
 ### Fixed
+
 - Fixed memory leaks and dangling references on reload/disable.
   - Static instance is now nullified on disable.
   - Event listeners unregistered explicitly.
@@ -123,14 +128,17 @@ and adheres to [Semantic Versioning](https://semver.org/).
 ## [1.0.1] - 2026-02-01
 
 ### Added
+
 - `/cg` and `/cg help` commands showing version, commands, permission nodes, and customizable messages (now a list in config).
 - Help command now appears in tab completion suggestions.
 
 ### Changed
+
 - Help messages format switched to a list under `help:` in config. (Supports empty lines as `""`).
 - Message prefix now referenced from `plugin.yml`. Updated version: `1.0.1-SNAPSHOT`.
 
 ### Fixed
+
 - Improved documentation consistency in configuration files.
 
 ---
@@ -138,7 +146,9 @@ and adheres to [Semantic Versioning](https://semver.org/).
 ## [1.0.0] - 2026-02-01
 
 ### Added
+
 #### Core Features
+
 - Per-World crafting control:
   - `/cg <world> on` - Enable
   - `/cg <world> off` - Disable
@@ -191,24 +201,24 @@ and adheres to [Semantic Versioning](https://semver.org/).
 
 | Feature                | v1.0.1 | v1.0.2 | v1.1.0 | v1.1.1 | v1.2.0 | v1.2.1 | v1.2.2 | v1.4.0 |
 | ---------------------- | ------ | ------ | ------ | ------ | ------ | ------ | ------ | ------ |
-| Per-World Control      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Configurable Messages  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Message Prefix System  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| PlaceholderAPI Support | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Debug Mode             | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Tab Completion         | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Help Command           | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| List-Based Help Config | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| State Persistence Fix  | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Memory Leak Fixes      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Java 21 Support        | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Paper 1.21.11 Support  | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Reload Command         | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| OP Bypass Fix          | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      | ✅      |
-| Granular Toggles       | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      | ✅      |
-| Public Help Command    | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      | ✅      |
-| Thread-Safe Cache      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      | ✅      |
-| Interactive GUI        | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ❌      | ✅      |
+| Per-World Control      | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Configurable Messages  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Message Prefix System  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| PlaceholderAPI Support | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Debug Mode             | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Tab Completion         | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Help Command           | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| List-Based Help Config | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| State Persistence Fix  | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Memory Leak Fixes      | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Java 21 Support        | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Paper 1.21.11 Support  | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Reload Command         | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| OP Bypass Fix          | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     | ✅     |
+| Granular Toggles       | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     | ✅     |
+| Public Help Command    | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     | ✅     |
+| Thread-Safe Cache      | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     | ✅     |
+| Interactive GUI        | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ❌     | ✅     |
 
 ---
 
