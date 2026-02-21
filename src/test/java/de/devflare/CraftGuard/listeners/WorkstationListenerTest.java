@@ -1,8 +1,5 @@
-package me.devflare.CraftGuard.listeners;
+package de.devflare.CraftGuard.listeners;
 
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.config.ConfigManager;
-import me.devflare.CraftGuard.utils.AsyncAuditLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -13,6 +10,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.config.ConfigManager;
+import de.devflare.CraftGuard.listeners.WorkstationListener;
+import de.devflare.CraftGuard.utils.AsyncAuditLogger;
 
 import java.util.UUID;
 

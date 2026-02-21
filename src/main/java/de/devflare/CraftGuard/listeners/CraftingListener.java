@@ -1,15 +1,16 @@
-package me.devflare.CraftGuard.listeners;
+package de.devflare.CraftGuard.listeners;
 
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.config.ConfigManager;
-import me.devflare.CraftGuard.utils.LogEntry;
-import me.devflare.CraftGuard.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.config.ConfigManager;
+import de.devflare.CraftGuard.utils.LogEntry;
+import de.devflare.CraftGuard.utils.MessageUtil;
 
 import java.time.LocalDateTime;
 import java.util.Map;

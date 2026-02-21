@@ -1,4 +1,4 @@
-package me.devflare.CraftGuard.utils;
+package de.devflare.CraftGuard.utils;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.util.Location;

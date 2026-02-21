@@ -1,8 +1,5 @@
-package me.devflare.CraftGuard.commands;
+package de.devflare.CraftGuard.commands;
 
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.config.ConfigManager;
-import me.devflare.CraftGuard.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -13,6 +10,10 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.config.ConfigManager;
+import de.devflare.CraftGuard.utils.MessageUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +29,9 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
 
     private final CraftGuard plugin;
     private final ConfigManager configManager;
-    private final me.devflare.CraftGuard.utils.GUIManager guiManager;
+    private final de.devflare.CraftGuard.utils.GUIManager guiManager;
 
-    public CraftGuardCommand(CraftGuard plugin, me.devflare.CraftGuard.utils.GUIManager guiManager) {
+    public CraftGuardCommand(CraftGuard plugin, de.devflare.CraftGuard.utils.GUIManager guiManager) {
         this.plugin = plugin;
         this.configManager = plugin.getConfigManager();
         this.guiManager = guiManager;

@@ -1,9 +1,10 @@
-package me.devflare.CraftGuard.config;
+package de.devflare.CraftGuard.config;
 
-import me.devflare.CraftGuard.CraftGuard;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+
+import de.devflare.CraftGuard.CraftGuard;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,11 +1,13 @@
-package me.devflare.CraftGuard.placeholders;
+package de.devflare.CraftGuard.placeholders;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.config.ConfigManager;
+
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.config.ConfigManager;
 
 /**
  * PlaceholderAPI expansion for CraftGuard

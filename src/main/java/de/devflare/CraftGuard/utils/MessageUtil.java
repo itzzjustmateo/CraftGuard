@@ -1,4 +1,4 @@
-package me.devflare.CraftGuard.utils;
+package de.devflare.CraftGuard.utils;
 
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;

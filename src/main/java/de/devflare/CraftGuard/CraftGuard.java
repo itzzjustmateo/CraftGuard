@@ -1,32 +1,33 @@
-package me.devflare.CraftGuard;
+package de.devflare.CraftGuard;
 
-import me.devflare.CraftGuard.commands.CraftGuardCommand;
-import me.devflare.CraftGuard.config.ConfigManager;
-import me.devflare.CraftGuard.listeners.ContainerListener;
-import me.devflare.CraftGuard.listeners.CraftingListener;
-import me.devflare.CraftGuard.listeners.PortalListener;
-import me.devflare.CraftGuard.listeners.WorkstationListener;
-import me.devflare.CraftGuard.placeholders.CraftGuardExpansion;
-import me.devflare.CraftGuard.utils.AsyncAuditLogger;
-import me.devflare.CraftGuard.utils.MessageUtil;
-import me.devflare.CraftGuard.utils.WorldGuardHook;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import de.devflare.CraftGuard.commands.CraftGuardCommand;
+import de.devflare.CraftGuard.config.ConfigManager;
+import de.devflare.CraftGuard.listeners.ContainerListener;
+import de.devflare.CraftGuard.listeners.CraftingListener;
+import de.devflare.CraftGuard.listeners.PortalListener;
+import de.devflare.CraftGuard.listeners.WorkstationListener;
+import de.devflare.CraftGuard.placeholders.CraftGuardExpansion;
+import de.devflare.CraftGuard.utils.AsyncAuditLogger;
+import de.devflare.CraftGuard.utils.MessageUtil;
+import de.devflare.CraftGuard.utils.WorldGuardHook;
+
 /**
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.4.0
+ * @version 1.4.1
  */
 public final class CraftGuard extends JavaPlugin {
 
     private static CraftGuard instance;
     private ConfigManager configManager;
-    private me.devflare.CraftGuard.utils.GUIManager guiManager;
-    private me.devflare.CraftGuard.listeners.GUIListener guiListener;
+    private de.devflare.CraftGuard.utils.GUIManager guiManager;
+    private de.devflare.CraftGuard.listeners.GUIListener guiListener;
     private CraftGuardExpansion placeholderExpansion;
     private CraftingListener craftingListener;
     private PortalListener portalListener;
@@ -60,7 +61,7 @@ public final class CraftGuard extends JavaPlugin {
         getLogger().info(configManager.getMessage("config-loaded"));
 
         // Initialize GUI Manager
-        guiManager = new me.devflare.CraftGuard.utils.GUIManager(this);
+        guiManager = new de.devflare.CraftGuard.utils.GUIManager(this);
 
         // Register command
         CraftGuardCommand commandHandler = new CraftGuardCommand(this, guiManager);
@@ -159,7 +160,7 @@ public final class CraftGuard extends JavaPlugin {
         portalListener = new PortalListener(this);
         workstationListener = new WorkstationListener(this);
         containerListener = new ContainerListener(this);
-        guiListener = new me.devflare.CraftGuard.listeners.GUIListener(this, guiManager);
+        guiListener = new de.devflare.CraftGuard.listeners.GUIListener(this, guiManager);
 
         Bukkit.getPluginManager().registerEvents(craftingListener, this);
         Bukkit.getPluginManager().registerEvents(portalListener, this);
@@ -173,7 +174,7 @@ public final class CraftGuard extends JavaPlugin {
      *
      * @return GUIManager instance
      */
-    public me.devflare.CraftGuard.utils.GUIManager getGuiManager() {
+    public de.devflare.CraftGuard.utils.GUIManager getGuiManager() {
         return guiManager;
     }
 

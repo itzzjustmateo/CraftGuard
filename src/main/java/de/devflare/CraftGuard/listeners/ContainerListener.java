@@ -1,8 +1,5 @@
-package me.devflare.CraftGuard.listeners;
+package de.devflare.CraftGuard.listeners;
 
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.utils.LogEntry;
-import me.devflare.CraftGuard.utils.MessageUtil;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -12,6 +9,10 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.utils.LogEntry;
+import de.devflare.CraftGuard.utils.MessageUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,8 +1,5 @@
-package me.devflare.CraftGuard.commands;
+package de.devflare.CraftGuard.commands;
 
-import me.devflare.CraftGuard.CraftGuard;
-import me.devflare.CraftGuard.config.ConfigManager;
-import me.devflare.CraftGuard.utils.GUIManager;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 
@@ -11,6 +8,11 @@ import org.bukkit.entity.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
+
+import de.devflare.CraftGuard.CraftGuard;
+import de.devflare.CraftGuard.commands.CraftGuardCommand;
+import de.devflare.CraftGuard.config.ConfigManager;
+import de.devflare.CraftGuard.utils.GUIManager;
 
 import static org.mockito.Mockito.*;
 

@@ -1,7 +1,8 @@
-package me.devflare.CraftGuard.utils;
+package de.devflare.CraftGuard.utils;
 
-import me.devflare.CraftGuard.CraftGuard;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import de.devflare.CraftGuard.CraftGuard;
 
 import java.io.BufferedWriter;
 import java.io.File;

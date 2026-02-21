@@ -1,4 +1,4 @@
-package me.devflare.CraftGuard.utils;
+package de.devflare.CraftGuard.utils;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
