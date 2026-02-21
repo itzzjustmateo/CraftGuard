@@ -275,6 +275,53 @@ public class ConfigManager {
         return config.getBoolean("updates.auto-download", true);
     }
 
+    // ==================== GUI Settings ====================
+
+    /**
+     * Get a GUI title (e.g. "main-menu", "workstations", "portals")
+     */
+    public String getGuiTitle(String key) {
+        return config.getString("gui.titles." + key, key);
+    }
+
+    /**
+     * Get the display name for a GUI category (e.g. "workstations", "portals")
+     */
+    public String getGuiCategoryName(String category) {
+        return config.getString("gui.categories." + category + ".name", category);
+    }
+
+    /**
+     * Get the lore for a GUI category
+     */
+    public String getGuiCategoryLore(String category) {
+        return config.getString("gui.categories." + category + ".lore", "");
+    }
+
+    /**
+     * Get the GUI display name for a specific item type
+     */
+    public String getGuiItemName(String type) {
+        return config.getString("gui.items." + type, type);
+    }
+
+    /**
+     * Get the GUI status text (enabled/disabled)
+     */
+    public String getGuiStatus(boolean enabled) {
+        return enabled
+                ? config.getString("gui.status.enabled", "<green>ᴇɴᴀʙʟᴇᴅ</green>")
+                : config.getString("gui.status.disabled", "<red>ᴅɪꜱᴀʙʟᴇᴅ</red>");
+    }
+
+    /**
+     * Get a GUI label (e.g. "status-prefix", "click-to-toggle", "click-to-open",
+     * "back")
+     */
+    public String getGuiLabel(String key) {
+        return config.getString("gui.labels." + key, key);
+    }
+
     // ==================== Logging Settings ====================
 
     /**

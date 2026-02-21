@@ -1,5 +1,6 @@
 package de.devflare.CraftGuard.utils;
 
+import de.devflare.CraftGuard.config.ConfigManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -29,26 +30,6 @@ public class GUIUtil {
             Map.entry("grindstone", Material.GRINDSTONE),
             Map.entry("stonecutter", Material.STONECUTTER));
 
-    // ── Small-caps display names ──
-    private static final Map<String, String> TYPE_SMALL_CAPS = Map.ofEntries(
-            Map.entry("crafting", "ᴄʀᴀꜰᴛɪɴɢ ᴛᴀʙʟᴇ"),
-            Map.entry("anvil", "ᴀɴᴠɪʟ"),
-            Map.entry("furnace", "ꜰᴜʀɴᴀᴄᴇ"),
-            Map.entry("blast-furnace", "ʙʟᴀꜱᴛ ꜰᴜʀɴᴀᴄᴇ"),
-            Map.entry("smoker", "ꜱᴍᴏᴋᴇʀ"),
-            Map.entry("enchanting", "ᴇɴᴄʜᴀɴᴛɪɴɢ ᴛᴀʙʟᴇ"),
-            Map.entry("brewing", "ʙʀᴇᴡɪɴɢ ꜱᴛᴀɴᴅ"),
-            Map.entry("smithing", "ꜱᴍɪᴛʜɪɴɢ ᴛᴀʙʟᴇ"),
-            Map.entry("loom", "ʟᴏᴏᴍ"),
-            Map.entry("cartography", "ᴄᴀʀᴛᴏɢʀᴀᴘʜʏ ᴛᴀʙʟᴇ"),
-            Map.entry("grindstone", "ɢʀɪɴᴅꜱᴛᴏɴᴇ"),
-            Map.entry("stonecutter", "ꜱᴛᴏɴᴇᴄᴜᴛᴛᴇʀ"));
-
-    // ── Portal small-caps display names ──
-    private static final Map<String, String> PORTAL_SMALL_CAPS = Map.of(
-            "nether-portal", "ɴᴇᴛʜᴇʀ ᴘᴏʀᴛᴀʟ",
-            "end-portal", "ᴇɴᴅ ᴘᴏʀᴛᴀʟ");
-
     private static final Map<String, Material> PORTAL_MATERIALS = Map.of(
             "nether-portal", Material.OBSIDIAN,
             "end-portal", Material.ENDER_EYE);
@@ -68,65 +49,62 @@ public class GUIUtil {
     }
 
     /**
-     * Create a workstation icon item (top row)
+     * Create a workstation icon item — reads name from config
      */
-    public static ItemStack getWorkstationIcon(String type, boolean enabled) {
+    public static ItemStack getWorkstationIcon(String type, boolean enabled, ConfigManager cfg) {
         Material material = TYPE_MATERIALS.getOrDefault(type, Material.BARRIER);
-        String label = TYPE_SMALL_CAPS.getOrDefault(type, type);
-        return buildIconItem(material, label, enabled);
+        return buildIconItem(material, cfg.getGuiItemName(type), enabled, cfg);
     }
 
     /**
-     * Create a portal icon item (top row)
+     * Create a portal icon item — reads name from config
      */
-    public static ItemStack getPortalIcon(String type, boolean enabled) {
+    public static ItemStack getPortalIcon(String type, boolean enabled, ConfigManager cfg) {
         Material material = PORTAL_MATERIALS.getOrDefault(type, Material.BARRIER);
-        String label = PORTAL_SMALL_CAPS.getOrDefault(type, type);
-        return buildIconItem(material, label, enabled);
+        return buildIconItem(material, cfg.getGuiItemName(type), enabled, cfg);
     }
 
     /**
-     * Build an icon item with MiniMessage styling
+     * Build an icon item with MiniMessage styling from config
      */
-    private static ItemStack buildIconItem(Material material, String label, boolean enabled) {
+    private static ItemStack buildIconItem(Material material, String label, boolean enabled, ConfigManager cfg) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            meta.displayName(noItalic(MM.deserialize("<bold><aqua>" + label + "</aqua></bold>")));
+            meta.displayName(noItalic(MM.deserialize(label)));
 
-            String statusColor = enabled ? "<green>" : "<red>";
-            String statusText = enabled ? "ᴇɴᴀʙʟᴇᴅ" : "ᴅɪꜱᴀʙʟᴇᴅ";
+            String statusText = cfg.getGuiStatus(enabled);
+            String statusPrefix = cfg.getGuiLabel("status-prefix");
+            String clickHint = cfg.getGuiLabel("click-to-toggle");
 
             meta.lore(List.of(
                     Component.empty(),
-                    noItalic(MM.deserialize("<gray>| sᴛᴀᴛᴜs: " + statusColor + statusText + "</"
-                            + (enabled ? "green" : "red") + "></gray>")),
+                    noItalic(MM.deserialize(statusPrefix + statusText)),
                     Component.empty(),
-                    noItalic(MM.deserialize("<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ</dark_gray>"))));
+                    noItalic(MM.deserialize(clickHint))));
             item.setItemMeta(meta);
         }
         return item;
     }
 
     /**
-     * Create a status indicator item (bottom row, directly below the icon)
+     * Create a status indicator item (below the icon) — reads from config
      */
-    public static ItemStack getStatusIndicator(String type, boolean enabled) {
+    public static ItemStack getStatusIndicator(String type, boolean enabled, ConfigManager cfg) {
         Material material = enabled ? Material.LIME_CONCRETE : Material.RED_CONCRETE;
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
-            String statusColor = enabled ? "<green>" : "<red>";
-            String statusText = enabled ? "ᴇɴᴀʙʟᴇᴅ" : "ᴅɪꜱᴀʙʟᴇᴅ";
+            String statusText = cfg.getGuiStatus(enabled);
+            String itemName = cfg.getGuiItemName(type);
+            String clickHint = cfg.getGuiLabel("click-to-toggle");
 
-            String label = TYPE_SMALL_CAPS.getOrDefault(type, PORTAL_SMALL_CAPS.getOrDefault(type, type));
-            meta.displayName(
-                    noItalic(MM.deserialize(statusColor + statusText + "</" + (enabled ? "green" : "red") + ">")));
+            meta.displayName(noItalic(MM.deserialize(statusText)));
 
             meta.lore(List.of(
                     Component.empty(),
-                    noItalic(MM.deserialize("<gray>| " + label + "</gray>")),
-                    noItalic(MM.deserialize("<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ</dark_gray>"))));
+                    noItalic(MM.deserialize("<gray>| </gray>" + itemName)),
+                    noItalic(MM.deserialize(clickHint))));
             item.setItemMeta(meta);
         }
         return item;
@@ -164,8 +142,7 @@ public class GUIUtil {
     }
 
     /**
-     * Remove italic decoration from a component (Minecraft adds italic to custom
-     * names by default)
+     * Remove italic decoration from a component
      */
     private static Component noItalic(Component component) {
         return component.decoration(TextDecoration.ITALIC, false);

@@ -41,6 +41,14 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command,
             @NotNull String label, @NotNull String[] args) {
 
+        // Check permission for administrative actions
+        if (!sender.hasPermission(configManager.getAdminPermission())) {
+            Component message = MessageUtil.format(
+                    configManager.getMessageWithPrefix("no-permission"));
+            sender.sendMessage(message);
+            return true;
+        }
+
         if (args.length == 0) {
             if (sender instanceof Player player) {
                 guiManager.openMainMenu(player);
@@ -54,14 +62,6 @@ public class CraftGuardCommand implements CommandExecutor, TabCompleter {
         String firstArg = args[0].toLowerCase();
         if (firstArg.equals("help") || firstArg.equals("?")) {
             sendHelpMessage(sender);
-            return true;
-        }
-
-        // Check permission for administrative actions
-        if (!sender.hasPermission(configManager.getAdminPermission())) {
-            Component message = MessageUtil.format(
-                    configManager.getMessageWithPrefix("no-permission"));
-            sender.sendMessage(message);
             return true;
         }
 

@@ -21,7 +21,7 @@ import de.devflare.CraftGuard.utils.WorldGuardHook;
  * CraftGuard - World-based crafting management for Minecraft servers
  * 
  * @author DevFlare, ItzzMateo
- * @version 1.5.0
+ * @version 1.5.1
  */
 public final class CraftGuard extends JavaPlugin {
 

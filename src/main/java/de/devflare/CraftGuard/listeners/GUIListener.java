@@ -47,9 +47,19 @@ public class GUIListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         String title = PlainTextComponentSerializer.plainText().serialize(event.getView().title());
 
-        // All our GUIs contain the small-caps "ᴄʀᴀꜰᴛɢᴜᴀʀᴅ"
-        if (!title.contains("ᴄʀᴀꜰᴛɢᴜᴀʀᴅ"))
+        String plainMain = PlainTextComponentSerializer.plainText().serialize(
+                net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                        .deserialize(plugin.getConfigManager().getGuiTitle("main-menu")));
+        String plainWorkstations = PlainTextComponentSerializer.plainText().serialize(
+                net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                        .deserialize(plugin.getConfigManager().getGuiTitle("workstations")));
+        String plainPortals = PlainTextComponentSerializer.plainText().serialize(
+                net.kyori.adventure.text.minimessage.MiniMessage.miniMessage()
+                        .deserialize(plugin.getConfigManager().getGuiTitle("portals")));
+
+        if (!title.equals(plainMain) && !title.equals(plainWorkstations) && !title.equals(plainPortals)) {
             return;
+        }
 
         event.setCancelled(true);
         if (!(event.getWhoClicked() instanceof Player player))
@@ -63,7 +73,7 @@ public class GUIListener implements Listener {
         int slot = event.getRawSlot();
 
         // ── Main Menu ──
-        if (!title.contains("»")) {
+        if (title.equals(plainMain)) {
             if (clicked.getType() == Material.CRAFTING_TABLE) {
                 guiManager.openSubMenu(player, "Workstations", 0);
             } else if (clicked.getType() == Material.ENDER_EYE) {
@@ -80,7 +90,7 @@ public class GUIListener implements Listener {
         }
 
         // ── Workstation Menu ──
-        if (title.contains("ᴡᴏʀᴋsᴛᴀᴛɪᴏɴs")) {
+        if (title.equals(plainWorkstations)) {
             String type = resolveWorkstationType(slot);
             if (type != null) {
                 toggleAndRefresh(player, type, "Workstations");
@@ -89,7 +99,7 @@ public class GUIListener implements Listener {
         }
 
         // ── Portal Menu ──
-        if (title.contains("ᴘᴏʀᴛᴀʟꜱ")) {
+        if (title.equals(plainPortals)) {
             String type = resolvePortalType(slot);
             if (type != null) {
                 toggleAndRefresh(player, type, "Portals");

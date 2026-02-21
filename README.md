@@ -1,6 +1,6 @@
 # CraftGuard
 
-![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.5.0-brightgreen?style=for-the-badge)
+![CraftGuard Logo](https://img.shields.io/badge/CraftGuard-v1.5.1-brightgreen?style=for-the-badge)
 [![Paper](https://img.shields.io/badge/Paper-1.21.11-blue?style=for-the-badge)](https://papermc.io/)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge)](https://www.oracle.com/java/)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://github.com/itzzjustmateo/CraftGuard/blob/main/LICENSE)
@@ -70,7 +70,7 @@ Recommended to use: Multiverse-Core
 
 ### Quick Start
 
-1. **Download** the latest `craftguard-1.5.0.jar` from [Modrinth](https://modrinth.com/plugin/craftguard)
+1. **Download** the latest `craftguard-1.5.1.jar` from [Modrinth](https://modrinth.com/plugin/craftguard)
 2. **Put** it in your server's `plugins/` folder
 3. **Restart** your server
 4. **Edit** the config: `plugins/CraftGuard/config.yml`

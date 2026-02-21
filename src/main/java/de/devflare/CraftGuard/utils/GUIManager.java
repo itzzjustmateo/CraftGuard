@@ -1,5 +1,6 @@
 package de.devflare.CraftGuard.utils;
 
+import de.devflare.CraftGuard.config.ConfigManager;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,7 +15,7 @@ public class GUIManager {
 
     private static final MiniMessage MM = MiniMessage.miniMessage();
 
-    private final CraftGuard plugin;
+    private final ConfigManager cfg;
 
     // Workstation types in display order
     private static final List<String> WORKSTATION_TYPES = List.of(
@@ -26,31 +27,33 @@ public class GUIManager {
             "nether-portal", "end-portal");
 
     public GUIManager(CraftGuard plugin) {
-        this.plugin = plugin;
+        this.cfg = plugin.getConfigManager();
     }
 
     public void openMainMenu(Player player) {
         Inventory inv = Bukkit.createInventory(null, 27,
-                MM.deserialize("<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ</dark_gray>"));
+                MM.deserialize(cfg.getGuiTitle("main-menu")));
 
         // Fill background
         for (int i = 0; i < 27; i++) {
             inv.setItem(i, GUIUtil.getPlaceholder());
         }
 
+        String clickToOpen = cfg.getGuiLabel("click-to-open");
+
         inv.setItem(11, GUIUtil.createItem(Material.CRAFTING_TABLE,
-                "<bold><gold>ᴡᴏʀᴋsᴛᴀᴛɪᴏɴs</gold></bold>",
+                cfg.getGuiCategoryName("workstations"),
                 "",
-                "<gray>| ᴍᴀɴᴀɢᴇ ᴄʀᴀꜰᴛɪɴɢ ᴀɴᴅ ᴛᴀʙʟᴇ ᴀᴄᴄᴇꜱꜱ</gray>",
+                cfg.getGuiCategoryLore("workstations"),
                 "",
-                "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ</dark_gray>"));
+                clickToOpen));
 
         inv.setItem(15, GUIUtil.createItem(Material.ENDER_EYE,
-                "<bold><dark_purple>ᴘᴏʀᴛᴀʟꜱ</dark_purple></bold>",
+                cfg.getGuiCategoryName("portals"),
                 "",
-                "<gray>| ᴍᴀɴᴀɢᴇ ᴘᴏʀᴛᴀʟ ɪɴᴛᴇʀᴀᴄᴛɪᴏɴ</gray>",
+                cfg.getGuiCategoryLore("portals"),
                 "",
-                "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ</dark_gray>"));
+                clickToOpen));
 
         player.openInventory(inv);
     }
@@ -67,7 +70,7 @@ public class GUIManager {
 
     private void openWorkstationMenu(Player player, String worldName) {
         Inventory inv = Bukkit.createInventory(null, 54,
-                MM.deserialize("<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ » ᴡᴏʀᴋsᴛᴀᴛɪᴏɴs</dark_gray>"));
+                MM.deserialize(cfg.getGuiTitle("workstations")));
 
         // Fill entire background
         for (int i = 0; i < 54; i++) {
@@ -84,46 +87,46 @@ public class GUIManager {
 
         for (int i = 0; i < WORKSTATION_TYPES.size(); i++) {
             String type = WORKSTATION_TYPES.get(i);
-            boolean enabled = plugin.getConfigManager().isFeatureEnabled(worldName, type);
+            boolean enabled = cfg.isFeatureEnabled(worldName, type);
 
             if (i < 7) {
-                inv.setItem(iconSlotsRow1[i], GUIUtil.getWorkstationIcon(type, enabled));
-                inv.setItem(statusSlotsRow1[i], GUIUtil.getStatusIndicator(type, enabled));
+                inv.setItem(iconSlotsRow1[i], GUIUtil.getWorkstationIcon(type, enabled, cfg));
+                inv.setItem(statusSlotsRow1[i], GUIUtil.getStatusIndicator(type, enabled, cfg));
             } else {
                 int j = i - 7;
-                inv.setItem(iconSlotsRow2[j], GUIUtil.getWorkstationIcon(type, enabled));
-                inv.setItem(statusSlotsRow2[j], GUIUtil.getStatusIndicator(type, enabled));
+                inv.setItem(iconSlotsRow2[j], GUIUtil.getWorkstationIcon(type, enabled, cfg));
+                inv.setItem(statusSlotsRow2[j], GUIUtil.getStatusIndicator(type, enabled, cfg));
             }
         }
 
         // Navigation — bottom row
-        inv.setItem(49, GUIUtil.createItem(Material.BARRIER, "<red>ʙᴀᴄᴋ</red>"));
+        inv.setItem(49, GUIUtil.createItem(Material.BARRIER, cfg.getGuiLabel("back")));
 
         player.openInventory(inv);
     }
 
     private void openPortalMenu(Player player, String worldName) {
         Inventory inv = Bukkit.createInventory(null, 27,
-                MM.deserialize("<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ » ᴘᴏʀᴛᴀʟꜱ</dark_gray>"));
+                MM.deserialize(cfg.getGuiTitle("portals")));
 
         // Fill background
         for (int i = 0; i < 27; i++) {
             inv.setItem(i, GUIUtil.getPlaceholder());
         }
 
-        // Centered: slots 12 and 14 for two portals
+        // Centered: slots 11 and 15 for two portals
         for (int i = 0; i < PORTAL_TYPES.size(); i++) {
             String type = PORTAL_TYPES.get(i);
-            boolean enabled = plugin.getConfigManager().isFeatureEnabled(worldName, type);
+            boolean enabled = cfg.isFeatureEnabled(worldName, type);
             int iconSlot = (i == 0) ? 11 : 15;
             int statusSlot = iconSlot + 9; // directly below
 
-            inv.setItem(iconSlot, GUIUtil.getPortalIcon(type, enabled));
-            inv.setItem(statusSlot, GUIUtil.getStatusIndicator(type, enabled));
+            inv.setItem(iconSlot, GUIUtil.getPortalIcon(type, enabled, cfg));
+            inv.setItem(statusSlot, GUIUtil.getStatusIndicator(type, enabled, cfg));
         }
 
         // Navigation
-        inv.setItem(22, GUIUtil.createItem(Material.BARRIER, "<red>ʙᴀᴄᴋ</red>"));
+        inv.setItem(22, GUIUtil.createItem(Material.BARRIER, cfg.getGuiLabel("back")));
 
         player.openInventory(inv);
     }

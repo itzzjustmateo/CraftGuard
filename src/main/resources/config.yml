@@ -7,70 +7,70 @@
 # Types: crafting, nether-portal, end-portal, anvil, furnace, etc.
 
 # !! DO NOT TOUCH !!
-config-version: 2
+config-version: 3
 
 # Controls the prefix shown at the start of all player-facing messages
 prefix:
   enabled: true
-  text: "<green>CraftGuard</green> "
+  text: "<green>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ</green> "
 
 messages:
   # Messages sent to players on command success
-  feature-enabled: "<green>{type}</green> has been <bold><green>enabled</green></bold> <gray>in world <yellow>{world}</yellow>.</gray>"
-  feature-disabled: "<red>{type}</red> has been <bold><red>disabled</red></bold> <gray>in world <yellow>{world}</yellow>.</gray>"
-  feature-toggled: "<yellow>{type}</yellow> in world <yellow>{world}</yellow> is now <bold>{state}</bold>."
+  feature-enabled: "<green>{type}</green> ʜᴀꜱ ʙᴇᴇɴ <bold><green>ᴇɴᴀʙʟᴇᴅ</green></bold> <gray>ɪɴ ᴡᴏʀʟᴅ <yellow>{world}</yellow>.</gray>"
+  feature-disabled: "<red>{type}</red> ʜᴀꜱ ʙᴇᴇɴ <bold><red>ᴅɪꜱᴀʙʟᴇᴅ</red></bold> <gray>ɪɴ ᴡᴏʀʟᴅ <yellow>{world}</yellow>.</gray>"
+  feature-toggled: "<yellow>{type}</yellow> ɪɴ ᴡᴏʀʟᴅ <yellow>{world}</yellow> ɪꜱ ɴᴏᴡ <bold>{state}</bold>."
 
   # Error messages shown to players
-  no-permission: "<red>You do not have permission to use this command.</red>"
-  world-not-found: "<red>World <yellow>{world}</yellow> was not found.</red>"
-  invalid-usage: "<red>Incorrect usage!</red> <gray>Correct syntax: /cg &l<world> &l<type> &l<on|off|toggle></gray>"
-  invalid-type: "<red>Unknown type specified!</red> <gray>Available types:</gray> <yellow>crafting, nether-portal, end-portal, anvil, furnace, enchanting, etc.</yellow>"
-  console-must-specify-world: "<red>This command must be run by a player or include a world name.</red>"
+  no-permission: "<red>ʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪꜱꜱɪᴏɴ ᴛᴏ ᴜꜱᴇ ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ.</red>"
+  world-not-found: "<red>ᴡᴏʀʟᴅ <yellow>{world}</yellow> ᴡᴀꜱ ɴᴏᴛ ꜰᴏᴜɴᴅ.</red>"
+  invalid-usage: "<red>ɪɴᴄᴏʀʀᴇᴄᴛ ᴜꜱᴀɢᴇ!</red> <gray>ꜱʏɴᴛᴀx: /cg <world> <type> <on|off|toggle></gray>"
+  invalid-type: "<red>ᴜɴᴋɴᴏᴡɴ ᴛʏᴘᴇ!</red> <gray>ᴀᴠᴀɪʟᴀʙʟᴇ:</gray> <yellow>crafting, nether-portal, end-portal, anvil, furnace, enchanting, etc.</yellow>"
+  console-must-specify-world: "<red>ᴛʜɪꜱ ᴄᴏᴍᴍᴀɴᴅ ᴍᴜꜱᴛ ʙᴇ ʀᴜɴ ʙʏ ᴀ ᴘʟᴀʏᴇʀ ᴏʀ ɪɴᴄʟᴜᴅᴇ ᴀ ᴡᴏʀʟᴅ ɴᴀᴍᴇ.</red>"
 
   # Message shown when a player tries to use a blocked feature
-  feature-blocked: "<red>{type}</red> is <bold>disabled</bold> in <yellow>{world}</yellow>. <gray>You cannot use it here.</gray>"
+  feature-blocked: "<red>{type}</red> ɪꜱ <bold>ᴅɪꜱᴀʙʟᴇᴅ</bold> ɪɴ <yellow>{world}</yellow>. <gray>ʏᴏᴜ ᴄᴀɴɴᴏᴛ ᴜꜱᴇ ɪᴛ ʜᴇʀᴇ.</gray>"
 
-  # Help command output
+  # Help command output (admin-only in v1.5.1+)
   help:
-    - "<dark_gray>------------------[ <green>CraftGuard Help</green> ]------------------</dark_gray>"
-    - "<yellow>Commands:</yellow>"
-    - " <aqua>/cg</aqua> <gray>» Open the management GUI</gray>"
+    - "<dark_gray>------------------[ <green>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ ʜᴇʟᴘ</green> ]------------------</dark_gray>"
+    - "<yellow>ᴄᴏᴍᴍᴀɴᴅꜱ:</yellow>"
+    - " <aqua>/cg</aqua> <gray>» ᴏᴘᴇɴ ᴛʜᴇ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ɢᴜɪ</gray>"
     - " <aqua>/cg <world> <type> <on|off|toggle></aqua>"
-    - " <gray>» Manage features (e.g. anvil, nether-portal, crafting)</gray>"
-    - " <aqua>/cg reload</aqua> <gray>» Reload configurations</gray>"
-    - " <aqua>/cg help</aqua> <gray>» Show this menu</gray>"
-    - "<yellow>Permissions:</yellow>"
-    - " <gray>Admin: <blue>craftguard.admin</blue></gray>"
-    - " <gray>Bypass: <blue>craftguard.bypass.<type></blue> or <blue>craftguard.bypass.*</blue></gray>"
-    - "<yellow>Features:</yellow>"
-    - " <gray>» Interactive GUI with premium design</gray>"
-    - " <gray>» Automatic update notifications via Modrinth</gray>"
+    - " <gray>» ᴍᴀɴᴀɢᴇ ꜰᴇᴀᴛᴜʀᴇꜱ (e.g. anvil, nether-portal, crafting)</gray>"
+    - " <aqua>/cg reload</aqua> <gray>» ʀᴇʟᴏᴀᴅ ᴄᴏɴꜰɪɢᴜʀᴀᴛɪᴏɴꜱ</gray>"
+    - " <aqua>/cg help</aqua> <gray>» ꜱʜᴏᴡ ᴛʜɪꜱ ᴍᴇɴᴜ</gray>"
+    - "<yellow>ᴘᴇʀᴍɪꜱꜱɪᴏɴꜱ:</yellow>"
+    - " <gray>ᴀᴅᴍɪɴ: <blue>craftguard.admin</blue></gray>"
+    - " <gray>ʙʏᴘᴀꜱꜱ: <blue>craftguard.bypass.<type></blue> ᴏʀ <blue>craftguard.bypass.*</blue></gray>"
+    - "<yellow>ꜰᴇᴀᴛᴜʀᴇꜱ:</yellow>"
+    - " <gray>» ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ɢᴜɪ ᴡɪᴛʜ ᴘʀᴇᴍɪᴜᴍ ᴅᴇꜱɪɢɴ</gray>"
+    - " <gray>» ᴀᴜᴛᴏᴍᴀᴛɪᴄ ᴜᴘᴅᴀᴛᴇ ɴᴏᴛɪꜰɪᴄᴀᴛɪᴏɴꜱ ᴠɪᴀ ᴍᴏᴅʀɪɴᴛʜ</gray>"
     - "<dark_gray>-----------------------------------------------------</dark_gray>"
 
-  # Status fragments (used for dynamic state messages, supports color and emphasis)
-  status-enabled: "<green><bold>ENABLED</bold></green>"
-  status-disabled: "<red><bold>DISABLED</bold></red>"
+  # Status fragments (used for dynamic state messages)
+  status-enabled: "<green><bold>ᴇɴᴀʙʟᴇᴅ</bold></green>"
+  status-disabled: "<red><bold>ᴅɪꜱᴀʙʟᴇᴅ</bold></red>"
 
   # Feature type names (how they appear in messages)
   type-names:
-    crafting: "Crafting"
-    nether-portal: "Nether Portal"
-    end-portal: "End Portal"
-    anvil: "Anvil"
-    furnace: "Furnace"
-    blast-furnace: "Blast Furnace"
-    smoker: "Smoker"
-    enchanting: "Enchanting"
-    brewing: "Brewing"
-    smithing: "Smithing"
-    loom: "Loom"
-    cartography: "Cartography"
-    grindstone: "Grindstone"
-    stonecutter: "Stonecutter"
+    crafting: "ᴄʀᴀꜰᴛɪɴɢ"
+    nether-portal: "ɴᴇᴛʜᴇʀ ᴘᴏʀᴛᴀʟ"
+    end-portal: "ᴇɴᴅ ᴘᴏʀᴛᴀʟ"
+    anvil: "ᴀɴᴠɪʟ"
+    furnace: "ꜰᴜʀɴᴀᴄᴇ"
+    blast-furnace: "ʙʟᴀꜱᴛ ꜰᴜʀɴᴀᴄᴇ"
+    smoker: "ꜱᴍᴏᴋᴇʀ"
+    enchanting: "ᴇɴᴄʜᴀɴᴛɪɴɢ"
+    brewing: "ʙʀᴇᴡɪɴɢ"
+    smithing: "ꜱᴍɪᴛʜɪɴɢ"
+    loom: "ʟᴏᴏᴍ"
+    cartography: "ᴄᴀʀᴛᴏɢʀᴀᴘʜʏ"
+    grindstone: "ɢʀɪɴᴅꜱᴛᴏɴᴇ"
+    stonecutter: "ꜱᴛᴏɴᴇᴄᴜᴛᴛᴇʀ"
 
   # Console-only messages
   plugin-enabled: "CraftGuard v{version} has started successfully and is now active."
-  config-reloaded: "&aCraftGuard configuration reloaded successfully."
+  config-reloaded: "<green>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ ᴄᴏɴꜰɪɢᴜʀᴀᴛɪᴏɴ ʀᴇʟᴏᴀᴅᴇᴅ ꜱᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ.</green>"
   plugin-disabled: "CraftGuard has been disabled and all features are now inactive."
   config-loaded: "Settings and configuration loaded for CraftGuard."
   commands-registered: "Registered command: /cg"
@@ -78,6 +78,53 @@ messages:
   placeholderapi-registered: "PlaceholderAPI integration enabled for CraftGuard."
   placeholderapi-failed: "Could not register PlaceholderAPI expansion. Placeholder support will be disabled."
   placeholderapi-not-found: "PlaceholderAPI not detected; placeholder support is unavailable."
+
+# ─────────────────────────────────────────
+# GUI Configuration
+# All text shown in the in-game GUI is customizable here.
+# ─────────────────────────────────────────
+gui:
+  titles:
+    main-menu: "<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ</dark_gray>"
+    workstations: "<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ » ᴡᴏʀᴋsᴛᴀᴛɪᴏɴs</dark_gray>"
+    portals: "<dark_gray>ᴄʀᴀꜰᴛɢᴜᴀʀᴅ » ᴘᴏʀᴛᴀʟꜱ</dark_gray>"
+
+  categories:
+    workstations:
+      name: "<bold><gold>ᴡᴏʀᴋsᴛᴀᴛɪᴏɴs</gold></bold>"
+      lore: "<gray>| ᴍᴀɴᴀɢᴇ ᴄʀᴀꜰᴛɪɴɢ ᴀɴᴅ ᴛᴀʙʟᴇ ᴀᴄᴄᴇꜱꜱ</gray>"
+    portals:
+      name: "<bold><dark_purple>ᴘᴏʀᴛᴀʟꜱ</dark_purple></bold>"
+      lore: "<gray>| ᴍᴀɴᴀɢᴇ ᴘᴏʀᴛᴀʟ ɪɴᴛᴇʀᴀᴄᴛɪᴏɴ</gray>"
+
+  # Display names for each item in the GUI
+  items:
+    crafting: "<bold><aqua>ᴄʀᴀꜰᴛɪɴɢ ᴛᴀʙʟᴇ</aqua></bold>"
+    anvil: "<bold><aqua>ᴀɴᴠɪʟ</aqua></bold>"
+    furnace: "<bold><aqua>ꜰᴜʀɴᴀᴄᴇ</aqua></bold>"
+    blast-furnace: "<bold><aqua>ʙʟᴀꜱᴛ ꜰᴜʀɴᴀᴄᴇ</aqua></bold>"
+    smoker: "<bold><aqua>ꜱᴍᴏᴋᴇʀ</aqua></bold>"
+    enchanting: "<bold><aqua>ᴇɴᴄʜᴀɴᴛɪɴɢ ᴛᴀʙʟᴇ</aqua></bold>"
+    brewing: "<bold><aqua>ʙʀᴇᴡɪɴɢ ꜱᴛᴀɴᴅ</aqua></bold>"
+    smithing: "<bold><aqua>ꜱᴍɪᴛʜɪɴɢ ᴛᴀʙʟᴇ</aqua></bold>"
+    loom: "<bold><aqua>ʟᴏᴏᴍ</aqua></bold>"
+    cartography: "<bold><aqua>ᴄᴀʀᴛᴏɢʀᴀᴘʜʏ ᴛᴀʙʟᴇ</aqua></bold>"
+    grindstone: "<bold><aqua>ɢʀɪɴᴅꜱᴛᴏɴᴇ</aqua></bold>"
+    stonecutter: "<bold><aqua>ꜱᴛᴏɴᴇᴄᴜᴛᴛᴇʀ</aqua></bold>"
+    nether-portal: "<bold><aqua>ɴᴇᴛʜᴇʀ ᴘᴏʀᴛᴀʟ</aqua></bold>"
+    end-portal: "<bold><aqua>ᴇɴᴅ ᴘᴏʀᴛᴀʟ</aqua></bold>"
+
+  # Status text shown in lore and indicators
+  status:
+    enabled: "<green>ᴇɴᴀʙʟᴇᴅ</green>"
+    disabled: "<red>ᴅɪꜱᴀʙʟᴇᴅ</red>"
+
+  # Reusable labels
+  labels:
+    status-prefix: "<gray>| sᴛᴀᴛᴜs: "
+    click-to-toggle: "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ</dark_gray>"
+    click-to-open: "<dark_gray>ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ</dark_gray>"
+    back: "<red>ʙᴀᴄᴋ</red>"
 
 # General plugin behavior settings
 settings:
